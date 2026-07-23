@@ -1,0 +1,22 @@
+generated: '2026-07-23'
+method: searched
+source: openapi/ servers + https://status.zemplerbank.com/ + OBIE Read/Write versioning
+note: >-
+  Lifecycle posture for the Cashplus/Zempler Open Banking surface. Versioning
+  follows the OBIE Read/Write uri-path scheme; the status page is the bank's
+  first-party page. No standalone published deprecation policy or SLA document
+  was found on the unauthenticated developer pages.
+versioning:
+  scheme: uri-path
+  current: v3.1
+  path_segment: /open-banking/v3.1/{aisp|pisp|cbpii}
+  standard: OBIE Read/Write API Standard v3.1.11
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public RFC 8594 Sunset/Deprecation policy document located; OBIE version retirement follows the OBIE standard roadmap rather than a bank-specific policy page.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.zemplerbank.com/
+deprecated_operations: []

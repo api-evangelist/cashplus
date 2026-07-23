@@ -1,0 +1,24 @@
+generated: '2026-07-23'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on the Cashplus/Zempler website and
+  developer hosts. Nothing was published anonymously — consistent with the review
+  finding that no public OIDC discovery document is reachable and the Open Banking
+  auth endpoints sit behind Open Banking Directory onboarding. Empty result is
+  valid recorded data; no raw files saved and no scoring pointer wired.
+hosts:
+  - host: https://developer.zemplerbank.com
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }
+  - host: https://www.zemplerbank.com
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }
+      - { path: /security.txt, status: 404 }

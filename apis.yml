@@ -231,6 +231,14 @@ apis:
   - type: APIReference
     url: https://developer.zemplerbank.com/
 common:
+- type: DomainSecurity
+  url: security/cashplus-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/cashplus-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/cashplus-scopes.yml
+- type: Authentication
+  url: authentication/cashplus-authentication.yml
 - type: OpenAPI
   url: openapi/cashplus-account-information-openapi.yml
 - type: Website
@@ -259,6 +267,32 @@ common:
   url: https://www.zemplerbank.com/contact/
 - type: StatusPage
   url: https://status.zemplerbank.com/
+- type: Lifecycle
+  url: lifecycle/cashplus-lifecycle.yml
+- type: Conventions
+  url: conventions/cashplus-conventions.yml
+- type: Idempotency
+  url: conventions/cashplus-conventions.yml
+- type: ErrorCatalog
+  url: errors/cashplus-problem-types.yml
+- type: Conformance
+  url: conformance/cashplus-conformance.yml
+- type: DataModel
+  url: data-model/cashplus-data-model.yml
+- type: MCPServer
+  url: mcp/cashplus-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/cashplus-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/cashplus-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/cashplus-account-information-overlay.yaml
+- type: Overlay
+  url: overlays/cashplus-payment-initiation-overlay.yaml
+- type: Overlay
+  url: overlays/cashplus-confirmation-of-funds-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

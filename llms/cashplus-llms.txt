@@ -1,0 +1,33 @@
+# Cashplus Bank (Zempler Bank)
+
+> Cashplus Bank (legal entity Advanced Payment Solutions Limited, rebranded to Zempler Bank in July 2024) is a UK challenger bank focused on business and personal current accounts, credit cards and payments for SMEs. As an FCA-authorised ASPSP it participates in UK Open Banking under PSD2, publishing OBIE Read/Write v3.1.11 APIs (Account Information, Payment Initiation, Confirmation of Funds) secured with FAPI OAuth2/OIDC, mutual-TLS and PSD2 SCA. It also runs a first-party partner developer platform. Cashplus is not a CMA9 mandated bank and publishes no unauthenticated Open Data surface.
+
+## Open Banking APIs (OBIE Read/Write v3.1.11)
+- [Account Information API (AISP)](https://developer.zemplerbank.com/developer-guides/open-banking/identity): accounts, balances, transactions, standing orders, direct debits, beneficiaries, statements.
+- [Payment Initiation API (PISP)](https://developer.zemplerbank.com/developer-guides/open-banking/identity): domestic, scheduled, standing-order, file and international payments.
+- [Confirmation of Funds API (CBPII)](https://developer.zemplerbank.com/developer-guides/open-banking/identity): funds-confirmation consents and checks.
+
+## First-party partner APIs (require a commercial relationship)
+- [Identity](https://developer.zemplerbank.com/developer-guides/api/identity), [Accounts](https://developer.zemplerbank.com/developer-guides/api/accounts), [Applications](https://developer.zemplerbank.com/developer-guides/api/applications), [Eligibility](https://developer.zemplerbank.com/developer-guides/api/eligibility), [Payments](https://developer.zemplerbank.com/developer-guides/api/payments), [Products](https://developer.zemplerbank.com/developer-guides/api/products), [Transactions](https://developer.zemplerbank.com/developer-guides/api/transactions).
+
+## Specs
+- [Account Information OpenAPI](openapi/cashplus-account-information-openapi.yml)
+- [Payment Initiation OpenAPI](openapi/cashplus-payment-initiation-openapi.yml)
+- [Confirmation of Funds OpenAPI](openapi/cashplus-confirmation-of-funds-openapi.yml)
+
+## Artifacts
+- [Authentication](authentication/cashplus-authentication.yml) — FAPI OAuth2/OIDC (TPP clientCredentials + PSU authorizationCode), mTLS.
+- [OAuth Scopes](scopes/cashplus-scopes.yml) — accounts, payments, fundsconfirmations.
+- [Conventions](conventions/cashplus-conventions.yml) — idempotency (x-idempotency-key), FAPI tracing headers, pagination, error envelope.
+- [Error catalog](errors/cashplus-problem-types.yml) — OBErrorResponse1 + UK.OBIE.* codes.
+- [Conformance](conformance/cashplus-conformance.yml) — OAuth2/OIDC/FAPI/PSD2/OBIE/mTLS.
+- [Data model](data-model/cashplus-data-model.yml) — OBIE consent/account/payment entity graph.
+- [Lifecycle](lifecycle/cashplus-lifecycle.yml) — uri-path versioning, status page.
+- [MCP tools (candidate)](mcp/cashplus-mcp.yml) and [tool crosswalk](mcp/cashplus-tool-crosswalk.yml).
+- [Agent skills](skills/_index.yml) — retrieve account data, initiate a domestic payment, confirm funds.
+
+## Docs
+- [Developer portal](https://developer.zemplerbank.com/)
+- [API overview](https://www.zemplerbank.com/api/)
+- [Status page](https://status.zemplerbank.com/)
+- [Open Banking Directory](https://directory.openbanking.org.uk/)

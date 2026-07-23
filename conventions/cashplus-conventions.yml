@@ -1,0 +1,63 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/cashplus-payment-initiation-openapi.yml, openapi/cashplus-account-information-openapi.yml, openapi/cashplus-confirmation-of-funds-openapi.yml
+note: >-
+  Cross-cutting request/response semantics for the Cashplus/Zempler UK Open
+  Banking (OBIE Read/Write v3.1.11) surface, derived from the harvested OBIE
+  standard specs the bank conforms to. These are the OBIE-standard conventions,
+  not a Cashplus-proprietary divergence.
+authentication:
+  style: FAPI OAuth2 / OpenID Connect (authorizationCode for PSU SCA, clientCredentials for TPP)
+  transport_security: mutual-TLS (MTLS) client authentication
+  message_signing:
+    header: x-jws-signature
+    detail: Detached JWS signature over the request/response body on payment and file operations (OBIE non-repudiation).
+  see: authentication/cashplus-authentication.yml
+idempotency:
+  supported: true
+  header: x-idempotency-key
+  applies_to: POST operations that create consents, payments, standing orders and file payments (24 operations carry the header)
+  max_length: 40
+  semantics: >-
+    An idempotent replay of a create request carrying the same x-idempotency-key
+    within the OBIE uniqueness window returns the originally created resource
+    rather than creating a duplicate. Required by the OBIE Read/Write standard on
+    payment-order and consent creation.
+  spec_evidence: x-idempotency-key request-header parameter across the payment-initiation spec
+pagination:
+  style: link-based (OBIE)
+  response_fields:
+    links: Links.Self, Links.First, Links.Prev, Links.Next, Links.Last
+    meta: Meta.TotalPages, Meta.FirstAvailableDateTime, Meta.LastAvailableDateTime
+  request_params:
+    - fromBookingDateTime
+    - toBookingDateTime
+  note: Collections (transactions, statements, standing-orders) page forward via Links.Next; total page count in Meta.TotalPages.
+request_tracing:
+  headers:
+    - name: x-fapi-interaction-id
+      role: Client-supplied interaction id echoed back on the response for end-to-end correlation (FAPI).
+    - name: x-fapi-auth-date
+      role: Time the PSU last logged in with the TPP.
+    - name: x-fapi-customer-ip-address
+      role: PSU IP address when present with the TPP.
+    - name: x-customer-user-agent
+      role: PSU user-agent forwarded by the TPP.
+versioning:
+  scheme: uri-path
+  current: v3.1
+  path_segment: /open-banking/v3.1/{aisp|pisp|cbpii}
+  see: lifecycle/cashplus-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  schema: OBErrorResponse1
+  shape:
+    Code: High-level textual error code categorising the failure.
+    Id: Unique reference for the error instance (audit).
+    Message: Brief human-readable error message.
+    Errors: Array of OBError1 { ErrorCode (UK.OBIE.* namespaced enum), Message, Path, Url }
+  see: errors/cashplus-problem-types.yml
+rate_limiting:
+  signalled: true
+  status: 429 Too Many Requests
+  note: OBIE polling/transaction-retrieval limits; per-TPP throttling applied by the ASPSP. No published numeric header contract in the standard specs.

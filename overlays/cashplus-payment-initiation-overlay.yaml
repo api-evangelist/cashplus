@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cashplus/Zempler Payment Initiation (PISP)
+  version: 1.0.0
+extends: openapi/cashplus-payment-initiation-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: cashplus
+      x-apievangelist-standard: OBIE Read/Write API Standard v3.1.11
+      x-apievangelist-proprietary: false
+      x-apievangelist-conventions: conventions/cashplus-conventions.yml
+      x-apievangelist-authentication: authentication/cashplus-authentication.yml
+      x-apievangelist-errors: errors/cashplus-problem-types.yml
+      x-apievangelist-note: >-
+        Cashplus/Zempler conforms to the shared OBIE Read/Write standard; this
+        overlay records API Evangelist enrichment pointers without mutating the
+        harvested standard spec.

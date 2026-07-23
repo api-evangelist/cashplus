@@ -1,0 +1,57 @@
+generated: '2026-07-23'
+method: derived
+status: candidate
+source: openapi/cashplus-account-information-openapi.yml, openapi/cashplus-payment-initiation-openapi.yml, openapi/cashplus-confirmation-of-funds-openapi.yml
+note: >-
+  Candidate MCP tool surface derived from the OBIE Read/Write operations the
+  Cashplus/Zempler APIs conform to. No official hosted Cashplus/Zempler MCP
+  server was found. Tools inherit their real input contract from the backing
+  OpenAPI operation (parameters + requestBody). Live calls require FAPI
+  OAuth2/mTLS and Open Banking Directory onboarding.
+server:
+  name: cashplus
+  transport: http
+  url: null
+tools:
+  - name: list_accounts
+    description: List accounts the access consent authorises.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccounts
+  - name: get_account
+    description: Get a single account's details.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccountsAccountId
+  - name: get_account_balances
+    description: Get balances for an account.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccountsAccountIdBalances
+  - name: get_account_transactions
+    description: Get transactions for an account.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccountsAccountIdTransactions
+  - name: get_account_standing_orders
+    description: Get standing orders for an account.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccountsAccountIdStandingOrders
+  - name: get_account_statements
+    description: Get statements for an account.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccountsAccountIdStatements
+  - name: create_account_access_consent
+    description: Create an account-access consent (AIS).
+    source_operation: openapi/cashplus-account-information-openapi.yml#CreateAccountAccessConsents
+  - name: get_account_access_consent
+    description: Get the status of an account-access consent.
+    source_operation: openapi/cashplus-account-information-openapi.yml#GetAccountAccessConsentsConsentId
+  - name: create_domestic_payment_consent
+    description: Create a domestic payment consent (PIS).
+    source_operation: openapi/cashplus-payment-initiation-openapi.yml#CreateDomesticPaymentConsents
+  - name: create_domestic_payment
+    description: Initiate a domestic payment against an authorised consent.
+    source_operation: openapi/cashplus-payment-initiation-openapi.yml#CreateDomesticPayments
+  - name: get_domestic_payment
+    description: Get a domestic payment order's status.
+    source_operation: openapi/cashplus-payment-initiation-openapi.yml#GetDomesticPaymentsDomesticPaymentId
+  - name: get_domestic_payment_consent_funds_confirmation
+    description: Confirm funds availability for a domestic payment consent.
+    source_operation: openapi/cashplus-payment-initiation-openapi.yml#GetDomesticPaymentConsentsConsentIdFundsConfirmation
+  - name: create_funds_confirmation_consent
+    description: Create a funds-confirmation consent (CBPII).
+    source_operation: openapi/cashplus-confirmation-of-funds-openapi.yml#CreateFundsConfirmationConsents
+  - name: create_funds_confirmation
+    description: Check whether sufficient funds are available (CBPII).
+    source_operation: openapi/cashplus-confirmation-of-funds-openapi.yml#CreateFundsConfirmations

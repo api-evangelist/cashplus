@@ -1,0 +1,40 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/ securitySchemes + OBIE Read/Write v3.1.11 conformance + review.yml
+note: >-
+  Standards conformance for the Cashplus/Zempler UK Open Banking surface, derived
+  from the harvested OBIE Read/Write specs and the bank's regulated ASPSP status.
+  Cashplus/Zempler is an FCA-authorised ASPSP conformant to the OBIE Read/Write
+  API Standard; it is NOT one of the CMA9 mandated banks and does not publish an
+  unauthenticated Open Data (ATM/branch) surface.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: openapi securitySchemes TPPOAuth2Security (clientCredentials) + PSUOAuth2Security (authorizationCode)
+  - id: oidc
+    conforms: true
+    evidence: FAPI OpenID Connect for PSU strong customer authentication (OBIE profile)
+  - id: fapi
+    conforms: true
+    evidence: FAPI-grade headers (x-fapi-interaction-id, x-fapi-auth-date, x-fapi-customer-ip-address) + mTLS + detached JWS
+  - id: psd2
+    conforms: true
+    evidence: FCA-authorised ASPSP; PSD2 AIS/PIS/CBPII with strong customer authentication
+  - id: obie-read-write-3.1.11
+    conforms: true
+    evidence: harvested OBIE Account & Transaction, Payment Initiation, and Confirmation of Funds v3.1.11 specs
+  - id: mtls
+    conforms: true
+    evidence: mutual-TLS client authentication required for the Open Banking surface
+  - id: detached-jws
+    conforms: true
+    evidence: x-jws-signature request/response header on payment and file operations
+  - id: obie-open-data
+    conforms: false
+    evidence: no unauthenticated ATM/branch/PCA Open Data endpoint published (non-CMA9 challenger)
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: OBIE uses its own OBErrorResponse1 envelope, not application/problem+json
+  - id: idempotency
+    conforms: true
+    evidence: x-idempotency-key header on payment/consent creation operations

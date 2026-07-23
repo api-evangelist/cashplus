@@ -1,0 +1,51 @@
+generated: '2026-07-23'
+method: derived
+source: mcp/cashplus-mcp.yml + openapi/
+note: >-
+  Crosswalk binding each candidate MCP tool to its backing OBIE OpenAPI
+  operationId. There is no live Cashplus/Zempler MCP server or GraphQL surface;
+  the MCP tools are derived from REST, so every tool binds high-confidence to a
+  real operation and there are no mcp-only tools. rest_only lists the large
+  remainder of OBIE operations not surfaced as marquee tools.
+surfaces:
+  openapi:
+    - openapi/cashplus-account-information-openapi.yml
+    - openapi/cashplus-payment-initiation-openapi.yml
+    - openapi/cashplus-confirmation-of-funds-openapi.yml
+  graphql: null
+  mcp:
+    url: null
+    status: candidate (no hosted server)
+crosswalk:
+  - { tool: list_accounts, category: accounts, rest: [GetAccounts], binding: rest, confidence: high }
+  - { tool: get_account, category: accounts, rest: [GetAccountsAccountId], binding: rest, confidence: high }
+  - { tool: get_account_balances, category: accounts, rest: [GetAccountsAccountIdBalances], binding: rest, confidence: high }
+  - { tool: get_account_transactions, category: accounts, rest: [GetAccountsAccountIdTransactions], binding: rest, confidence: high }
+  - { tool: get_account_standing_orders, category: accounts, rest: [GetAccountsAccountIdStandingOrders], binding: rest, confidence: high }
+  - { tool: get_account_statements, category: accounts, rest: [GetAccountsAccountIdStatements], binding: rest, confidence: high }
+  - { tool: create_account_access_consent, category: consent, rest: [CreateAccountAccessConsents], binding: rest, confidence: high }
+  - { tool: get_account_access_consent, category: consent, rest: [GetAccountAccessConsentsConsentId], binding: rest, confidence: high }
+  - { tool: create_domestic_payment_consent, category: payments, rest: [CreateDomesticPaymentConsents], binding: rest, confidence: high }
+  - { tool: create_domestic_payment, category: payments, rest: [CreateDomesticPayments], binding: rest, confidence: high }
+  - { tool: get_domestic_payment, category: payments, rest: [GetDomesticPaymentsDomesticPaymentId], binding: rest, confidence: high }
+  - { tool: get_domestic_payment_consent_funds_confirmation, category: payments, rest: [GetDomesticPaymentConsentsConsentIdFundsConfirmation], binding: rest, confidence: high }
+  - { tool: create_funds_confirmation_consent, category: funds-confirmation, rest: [CreateFundsConfirmationConsents], binding: rest, confidence: high }
+  - { tool: create_funds_confirmation, category: funds-confirmation, rest: [CreateFundsConfirmations], binding: rest, confidence: high }
+mcp_only: []
+rest_only:
+  - capability: account-information detail resources
+    operations: [GetAccountsAccountIdBeneficiaries, GetAccountsAccountIdDirectDebits, GetAccountsAccountIdOffers, GetAccountsAccountIdParties, GetAccountsAccountIdParty, GetAccountsAccountIdProduct, GetAccountsAccountIdScheduledPayments, GetAccountsAccountIdStatementsStatementId, GetAccountsAccountIdStatementsStatementIdFile, GetAccountsAccountIdStatementsStatementIdTransactions]
+  - capability: account-information bulk resources
+    operations: [GetBalances, GetBeneficiaries, GetDirectDebits, GetOffers, GetParty, GetProducts, GetScheduledPayments, GetStandingOrders, GetStatements, GetTransactions, DeleteAccountAccessConsentsConsentId]
+  - capability: scheduled + standing-order payments
+    operations: [CreateDomesticScheduledPaymentConsents, CreateDomesticScheduledPayments, CreateDomesticStandingOrderConsents, CreateDomesticStandingOrders]
+  - capability: file + international payments
+    operations: [CreateFilePaymentConsents, CreateFilePayments, CreateInternationalPaymentConsents, CreateInternationalPayments, CreateInternationalScheduledPayments, CreateInternationalStandingOrders]
+  - capability: funds-confirmation consent lifecycle
+    operations: [GetFundsConfirmationConsentsConsentId, DeleteFundsConfirmationConsentsConsentId]
+coverage:
+  tools_named: 14
+  tools_bound: 14
+  mcp_only: 0
+  rest_ops_total: 74
+  rest_ops_with_tool: 14

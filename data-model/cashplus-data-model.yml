@@ -1,0 +1,77 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/cashplus-account-information-openapi.yml, openapi/cashplus-payment-initiation-openapi.yml, openapi/cashplus-confirmation-of-funds-openapi.yml
+note: >-
+  Entity-relationship graph derived from the OBIE Read/Write resource paths and
+  consent model. Identifiers (ConsentId, AccountId, StatementId, payment ids)
+  drive the relationships. Consent is the root authorisation entity that gates
+  access to accounts, funds confirmations and payment orders.
+entities:
+  - name: AccountAccessConsent
+    id: ConsentId
+    domain: account-information
+    relationships:
+      - { type: has_many, target: Account, via: consent }
+  - name: Account
+    id: AccountId
+    domain: account-information
+    relationships:
+      - { type: has_many, target: Balance, via: AccountId }
+      - { type: has_many, target: Transaction, via: AccountId }
+      - { type: has_many, target: Beneficiary, via: AccountId }
+      - { type: has_many, target: DirectDebit, via: AccountId }
+      - { type: has_many, target: StandingOrder, via: AccountId }
+      - { type: has_many, target: ScheduledPayment, via: AccountId }
+      - { type: has_many, target: Statement, via: AccountId }
+      - { type: has_many, target: Offer, via: AccountId }
+      - { type: has_one, target: Product, via: AccountId }
+      - { type: has_one, target: Party, via: AccountId }
+  - name: Statement
+    id: StatementId
+    domain: account-information
+    relationships:
+      - { type: belongs_to, target: Account, via: AccountId }
+      - { type: has_many, target: Transaction, via: StatementId }
+  - name: Transaction
+    domain: account-information
+    relationships:
+      - { type: belongs_to, target: Account, via: AccountId }
+  - name: DomesticPaymentConsent
+    id: ConsentId
+    domain: payment-initiation
+    relationships:
+      - { type: has_one, target: DomesticPayment, via: ConsentId }
+  - name: DomesticPayment
+    id: DomesticPaymentId
+    domain: payment-initiation
+    relationships:
+      - { type: belongs_to, target: DomesticPaymentConsent, via: ConsentId }
+  - name: DomesticScheduledPaymentConsent
+    id: ConsentId
+    domain: payment-initiation
+    relationships:
+      - { type: has_one, target: DomesticScheduledPayment, via: ConsentId }
+  - name: DomesticStandingOrderConsent
+    id: ConsentId
+    domain: payment-initiation
+    relationships:
+      - { type: has_one, target: DomesticStandingOrder, via: ConsentId }
+  - name: FilePaymentConsent
+    id: ConsentId
+    domain: payment-initiation
+    relationships:
+      - { type: has_one, target: FilePayment, via: ConsentId }
+  - name: InternationalPaymentConsent
+    id: ConsentId
+    domain: payment-initiation
+    relationships:
+      - { type: has_one, target: InternationalPayment, via: ConsentId }
+  - name: FundsConfirmationConsent
+    id: ConsentId
+    domain: confirmation-of-funds
+    relationships:
+      - { type: has_many, target: FundsConfirmation, via: ConsentId }
+  - name: FundsConfirmation
+    domain: confirmation-of-funds
+    relationships:
+      - { type: belongs_to, target: FundsConfirmationConsent, via: ConsentId }

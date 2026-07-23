@@ -1,0 +1,95 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/cashplus-payment-initiation-openapi.yml (OBErrorResponse1 / OBError1)
+format: obie-error-response
+note: >-
+  Derived from the OBIE Read/Write standard error model the Cashplus/Zempler APIs
+  conform to. HTTP-level responses come from the OpenAPI 4xx/5xx responses; the
+  detail error codes come from the OBError1 ErrorCode namespaced enum. OBIE uses
+  its own OBErrorResponse1 envelope (not application/problem+json).
+envelope:
+  media_type: application/json
+  schema: OBErrorResponse1
+  fields: [Code, Id, Message, Errors]
+  error_item: OBError1
+  error_item_fields: [ErrorCode, Message, Path, Url]
+http_responses:
+  - status: 400
+    title: Bad request
+    detail: Request failed validation; body carries an OBErrorResponse1 with one or more UK.OBIE.* detail codes.
+  - status: 401
+    title: Unauthorized
+    detail: Missing or invalid access token / SCA not completed.
+  - status: 403
+    title: Forbidden
+    detail: Token lacks the required scope or consent for the resource.
+  - status: 404
+    title: Not found
+    detail: Resource (consent, account, payment) does not exist or is not visible under the consent.
+  - status: 405
+    title: Method not allowed
+  - status: 406
+    title: Not acceptable
+  - status: 415
+    title: Unsupported media type
+  - status: 429
+    title: Too many requests
+    detail: TPP has exceeded the ASPSP polling / rate limit.
+  - status: 500
+    title: Internal server error
+    detail: Unexpected ASPSP error; body may carry UK.OBIE.UnexpectedError.
+detail_error_codes:
+  - code: UK.OBIE.Field.Expected
+    meaning: A field was expected but a related condition was not met.
+  - code: UK.OBIE.Field.Invalid
+    meaning: A field value failed validation.
+  - code: UK.OBIE.Field.InvalidDate
+    meaning: A date field is invalid or out of allowed range.
+  - code: UK.OBIE.Field.Missing
+    meaning: A mandatory field was not supplied.
+  - code: UK.OBIE.Field.Unexpected
+    meaning: An unexpected field was supplied.
+  - code: UK.OBIE.Header.Invalid
+    meaning: A request header value is invalid.
+  - code: UK.OBIE.Header.Missing
+    meaning: A mandatory request header is missing.
+  - code: UK.OBIE.Reauthenticate
+    meaning: The PSU must re-authenticate (SCA) to proceed.
+  - code: UK.OBIE.Resource.ConsentMismatch
+    meaning: The resource does not match the supplied consent.
+  - code: UK.OBIE.Resource.InvalidConsentStatus
+    meaning: The consent is not in a valid status for the operation.
+  - code: UK.OBIE.Resource.InvalidFormat
+    meaning: The resource identifier format is invalid.
+  - code: UK.OBIE.Resource.NotFound
+    meaning: The requested resource was not found.
+  - code: UK.OBIE.Rules.AfterCutOffDateTime
+    meaning: The request was received after the payment cut-off time.
+  - code: UK.OBIE.Rules.DuplicateReference
+    meaning: A duplicate payment reference was detected.
+  - code: UK.OBIE.Signature.Invalid
+    meaning: The detached JWS signature is invalid.
+  - code: UK.OBIE.Signature.InvalidClaim
+    meaning: A JWS signature claim is invalid.
+  - code: UK.OBIE.Signature.Malformed
+    meaning: The JWS signature is malformed.
+  - code: UK.OBIE.Signature.Missing
+    meaning: A required JWS signature is missing.
+  - code: UK.OBIE.Signature.MissingClaim
+    meaning: A required JWS signature claim is missing.
+  - code: UK.OBIE.Signature.Unexpected
+    meaning: A JWS signature was supplied where none was expected.
+  - code: UK.OBIE.UnexpectedError
+    meaning: An unexpected/unclassified ASPSP error occurred.
+  - code: UK.OBIE.Unsupported.AccountIdentifier
+    meaning: The account identifier scheme is not supported.
+  - code: UK.OBIE.Unsupported.AccountSecondaryIdentifier
+    meaning: The secondary account identifier is not supported.
+  - code: UK.OBIE.Unsupported.Currency
+    meaning: The currency is not supported.
+  - code: UK.OBIE.Unsupported.Frequency
+    meaning: The standing-order frequency is not supported.
+  - code: UK.OBIE.Unsupported.LocalInstrument
+    meaning: The payment local instrument is not supported.
+  - code: UK.OBIE.Unsupported.Scheme
+    meaning: The payment/account scheme is not supported.

@@ -1,0 +1,16 @@
+generated: '2026-07-23'
+method: generated
+source: openapi/ operations (grounded, verified operationIds)
+skills:
+  - file: cashplus-retrieve-account-data.md
+    name: Retrieve account information (AIS)
+    api: openapi/cashplus-account-information-openapi.yml
+    operations: [CreateAccountAccessConsents, GetAccountAccessConsentsConsentId, GetAccounts, GetAccountsAccountId, GetAccountsAccountIdBalances, GetAccountsAccountIdTransactions]
+  - file: cashplus-initiate-domestic-payment.md
+    name: Initiate a domestic payment (PIS)
+    api: openapi/cashplus-payment-initiation-openapi.yml
+    operations: [CreateDomesticPaymentConsents, GetDomesticPaymentConsentsConsentId, GetDomesticPaymentConsentsConsentIdFundsConfirmation, CreateDomesticPayments, GetDomesticPaymentsDomesticPaymentId]
+  - file: cashplus-confirm-funds.md
+    name: Confirm funds availability (CBPII)
+    api: openapi/cashplus-confirmation-of-funds-openapi.yml
+    operations: [CreateFundsConfirmationConsents, GetFundsConfirmationConsentsConsentId, CreateFundsConfirmations, DeleteFundsConfirmationConsentsConsentId]
