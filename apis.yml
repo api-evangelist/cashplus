@@ -1,0 +1,264 @@
+aid: cashplus
+url: https://raw.githubusercontent.com/api-evangelist/cashplus/refs/heads/main/apis.yml
+name: Cashplus Bank
+kind: company
+description: >-
+  Cashplus Bank (legal entity Advanced Payment Solutions Limited, rebranded to
+  Zempler Bank in July 2024) is a UK challenger bank founded in 2005 that grew
+  from a prepaid-card issuer into a fully licensed bank, receiving its UK banking
+  licence in 2021 and regulated by the Financial Conduct Authority (FCA) and the
+  Prudential Regulation Authority (PRA). It focuses on business current accounts,
+  personal current accounts, credit cards, and payments for micro-enterprises,
+  sole traders, and small-to-medium businesses. Following a 2026 acquisition it
+  operates as a subsidiary of The Access Bank UK (part of Nigeria's Access Bank
+  plc). As an FCA-authorised ASPSP it participates in UK Open Banking under PSD2,
+  publishing Read/Write APIs conformant to the Open Banking Implementation Entity
+  (OBIE) standard - Account Information (AIS), Payment Initiation (PIS), and
+  Confirmation of Funds (CBPII) - secured with FAPI-grade OAuth2/OIDC, mutual-TLS,
+  PSD2 strong customer authentication, and OBIE/eIDAS certificates. Cashplus is
+  not one of the CMA9 mandated banks. Alongside the regulated Open Banking
+  surface it runs a first-party partner/developer platform documenting proprietary
+  Identity, Accounts, Applications, Eligibility, Payments, Products, and
+  Transactions APIs for embedded and commercial integrations.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial Services
+- Banking
+- Open Banking
+- PSD2
+- OBIE
+- FAPI
+- United Kingdom
+- Payments
+- Account Information
+- Challenger Bank
+- Business Banking
+- Fintech
+created: '2026-07-23'
+modified: '2026-07-23'
+specificationVersion: '0.19'
+apis:
+- aid: cashplus:cashplus-account-information-api
+  name: Cashplus Account Information API
+  description: >-
+    Open Banking Account Information Service Provider (AISP) API conformant to the
+    OBIE Read/Write API Standard, exposing account access consents, account
+    details, balances, transactions, standing orders, direct debits, beneficiaries,
+    and statements. Secured with FAPI OAuth2/OIDC, mutual-TLS, and PSD2 strong
+    customer authentication. The harvested OpenAPI is the shared OBIE standard the
+    bank conforms to, not a bank-proprietary contract.
+  humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  baseURL: ''
+  tags:
+  - Account Information
+  - AISP
+  - Open Banking
+  - PSD2
+  - OBIE
+  properties:
+  - type: OpenAPI
+    url: openapi/cashplus-account-information-openapi.yml
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  - type: APIReference
+    url: https://www.zemplerbank.com/api/
+- aid: cashplus:cashplus-payment-initiation-api
+  name: Cashplus Payment Initiation API
+  description: >-
+    Open Banking Payment Initiation Service Provider (PISP) API conformant to the
+    OBIE Read/Write API Standard, supporting domestic payments, domestic scheduled
+    payments, and domestic standing orders with the customer approving each payment
+    via PSD2 strong customer authentication over FAPI OAuth2/OIDC and mutual-TLS.
+    The harvested OpenAPI is the shared OBIE standard the bank conforms to, not a
+    bank-proprietary contract.
+  humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  baseURL: ''
+  tags:
+  - Payment Initiation
+  - PISP
+  - Open Banking
+  - PSD2
+  - OBIE
+  properties:
+  - type: OpenAPI
+    url: openapi/cashplus-payment-initiation-openapi.yml
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  - type: APIReference
+    url: https://www.zemplerbank.com/api/
+- aid: cashplus:cashplus-confirmation-of-funds-api
+  name: Cashplus Confirmation of Funds API
+  description: >-
+    Open Banking Card Based Payment Instrument Issuer (CBPII) Confirmation of Funds
+    API conformant to the OBIE Read/Write API Standard, letting authorised
+    providers establish a funds-confirmation consent and check whether sufficient
+    funds are available on a customer account, secured with FAPI OAuth2/OIDC, PSD2
+    SCA, and mutual-TLS. The harvested OpenAPI is the shared OBIE standard the bank
+    conforms to, not a bank-proprietary contract.
+  humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  baseURL: ''
+  tags:
+  - Confirmation of Funds
+  - CBPII
+  - Open Banking
+  - PSD2
+  - OBIE
+  properties:
+  - type: OpenAPI
+    url: openapi/cashplus-confirmation-of-funds-openapi.yml
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  - type: APIReference
+    url: https://www.zemplerbank.com/api/
+- aid: cashplus:cashplus-identity-api
+  name: Cashplus Identity API
+  description: >-
+    First-party partner API for authentication and registration against the
+    Cashplus/Zempler developer platform, used to obtain credentials and tokens
+    before calling the proprietary Accounts, Payments, Applications, Eligibility,
+    Products, and Transactions APIs. Requires a direct commercial relationship with
+    the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/identity
+  baseURL: ''
+  tags:
+  - Identity
+  - Authentication
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/identity
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+- aid: cashplus:cashplus-accounts-api
+  name: Cashplus Accounts API
+  description: >-
+    First-party partner API to retrieve real-time account details and current
+    balance for Cashplus/Zempler business and personal current accounts, for
+    reconciliation and financial analysis. Requires a direct commercial
+    relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/accounts
+  baseURL: ''
+  tags:
+  - Accounts
+  - Balances
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/accounts
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+- aid: cashplus:cashplus-applications-api
+  name: Cashplus Applications API
+  description: >-
+    First-party partner API to create applications that open new Cashplus/Zempler
+    current accounts programmatically, enabling embedded account onboarding within
+    partner platforms. Requires a direct commercial relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/applications
+  baseURL: ''
+  tags:
+  - Applications
+  - Onboarding
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/applications
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+- aid: cashplus:cashplus-eligibility-api
+  name: Cashplus Eligibility API
+  description: >-
+    First-party partner API for running credit card eligibility checks against
+    Cashplus/Zempler credit products. Requires a direct commercial relationship
+    with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/eligibility
+  baseURL: ''
+  tags:
+  - Eligibility
+  - Credit
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/eligibility
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+- aid: cashplus:cashplus-payments-api
+  name: Cashplus Payments API
+  description: >-
+    First-party partner API to initiate single and batch domestic GBP payments at
+    low cost from Cashplus/Zempler accounts, marketed for partners as a lower-cost
+    alternative to standard payment rails. Requires a direct commercial
+    relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/payments
+  baseURL: ''
+  tags:
+  - Payments
+  - Batch Payments
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/payments
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+- aid: cashplus:cashplus-products-api
+  name: Cashplus Products API
+  description: >-
+    First-party partner API to query the catalogue of Cashplus/Zempler banking
+    products. Requires a direct commercial relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/products
+  baseURL: ''
+  tags:
+  - Products
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/products
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+- aid: cashplus:cashplus-transactions-api
+  name: Cashplus Transactions API
+  description: >-
+    First-party partner API to search and filter transactions on Cashplus/Zempler
+    accounts, for reconciliation and reporting. Requires a direct commercial
+    relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/transactions
+  baseURL: ''
+  tags:
+  - Transactions
+  - Partner API
+  properties:
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/transactions
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+common:
+- type: OpenAPI
+  url: openapi/cashplus-account-information-openapi.yml
+- type: Website
+  url: https://www.zemplerbank.com/
+- type: DeveloperPortal
+  url: https://developer.zemplerbank.com/
+- type: Documentation
+  url: https://www.zemplerbank.com/api-developer/
+- type: OpenBanking
+  url: https://www.zemplerbank.com/api/
+- type: OpenBankingDirectory
+  url: https://www.openbanking.org.uk/customers/regulated-providers/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/zemplerbank
+- type: Blog
+  url: https://www.zemplerbank.com/about/news/
+- type: TermsOfService
+  url: https://www.zemplerbank.com/terms-and-conditions/
+- type: Legal
+  url: https://www.zemplerbank.com/legal/
+- type: PrivacyPolicy
+  url: https://www.zemplerbank.com/policies/privacy-policy/
+- type: Support
+  url: https://www.zemplerbank.com/help/
+- type: Contact
+  url: https://www.zemplerbank.com/contact/
+- type: StatusPage
+  url: https://status.zemplerbank.com/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

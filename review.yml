@@ -1,0 +1,140 @@
+aid: cashplus
+name: Cashplus Bank
+review:
+  question: Does Cashplus Bank (now Zempler Bank) publish a genuine public API surface
+    - a developer portal, UK Open Banking (OBIE) Read/Write conformance, and any
+    first-party APIs - and what is its authentication model and spec provenance?
+  answer: true
+  date: '2026-07-23'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    Cashplus Bank (legal entity Advanced Payment Solutions Limited) rebranded to
+    Zempler Bank in July 2024; cashplus.com and developer.cashplus.com now
+    301-redirect to zemplerbank.com / developer.zemplerbank.com. It is a UK
+    challenger bank (founded 2005, full UK banking licence 2021, FCA + PRA
+    regulated, acquired by The Access Bank UK in 2026) focused on business and
+    personal current accounts for SMEs. It is an FCA-authorised ASPSP but is NOT
+    one of the CMA9 mandated banks.
+
+    Two real public API surfaces were confirmed. (1) A first-party partner
+    developer platform at https://developer.zemplerbank.com/ (live, 200)
+    documenting seven proprietary REST APIs behind Swagger - Identity, Accounts,
+    Applications, Eligibility, Payments (single/batch domestic GBP), Products,
+    and Transactions - available to partners with a direct commercial
+    relationship. (2) UK Open Banking under PSD2: Account Information (AISP),
+    Payment Initiation (PISP), and Confirmation of Funds (CBPII) APIs conformant
+    to the OBIE Read/Write API Standard, with onboarding via the Open Banking
+    Directory (directory.openbanking.org.uk) and the bank's Open Banking
+    identity guides.
+
+    NO Open Data (unauthenticated ATM/branch/PCA reference-data) endpoint was
+    confirmed. Guessed Open Data hosts (openbanking.zemplerbank.com,
+    api.zemplerbank.com, .well-known/open-banking/atms on both apex domains) all
+    failed to resolve (000) or returned 404. This is expected: Open Data ATM/
+    branch APIs are a CMA9-weighted obligation and Cashplus/Zempler, as a
+    non-CMA9 challenger centred on business current accounts, does not appear to
+    publish them. open_data_confirmed = false.
+
+    Authentication for the Open Banking surface is the standard OBIE/FAPI model
+    (OAuth2/OIDC, mutual-TLS client authentication, PSD2 strong customer
+    authentication, OBIE/eIDAS certificates) but was NOT independently verified
+    live: no public .well-known/openid-configuration was reachable
+    (developer.zemplerbank.com/.well-known/openid-configuration = 404). The
+    legacy Cashplus proprietary API sandbox host apisandbox.mycashplus.co.uk
+    still resolves but its origin returns HTTP 520 (Cloudflare origin error),
+    so no base URL or swagger could be retrieved from it. No production or
+    sandbox base URLs are exposed on the unauthenticated developer pages (the
+    portal is JavaScript-rendered), so apis[].baseURL is intentionally left
+    empty rather than fabricated.
+  transports:
+    - protocol: REST
+      scheme: https
+      documented: true
+      note: First-party partner APIs (Identity/Accounts/Applications/Eligibility/Payments/Products/Transactions)
+        documented via Swagger at developer.zemplerbank.com; base URLs not exposed on public unauthenticated pages.
+    - protocol: REST
+      scheme: https
+      documented: true
+      note: OBIE Read/Write Open Banking APIs (AISP/PISP/CBPII); FAPI OAuth2/OIDC + mTLS + PSD2 SCA;
+        bank-specific resource host not publicly disclosed without Open Banking Directory onboarding.
+  endpointsConfirmed:
+    - GET https://developer.zemplerbank.com/ (200 - live developer portal)
+    - GET https://www.zemplerbank.com/api/ (200 - Open Banking / API overview)
+    - GET https://www.zemplerbank.com/api-developer/ (200 - developer overview)
+    - GET https://developer.zemplerbank.com/developer-guides/api/accounts (200)
+    - GET https://developer.zemplerbank.com/developer-guides/api/applications (200)
+    - GET https://developer.zemplerbank.com/developer-guides/open-banking/identity (200)
+    - GET https://status.zemplerbank.com/ (200 - status page)
+    - GET https://developer.zemplerbank.com/.well-known/openid-configuration (404 - no public OIDC discovery)
+    - GET https://apisandbox.mycashplus.co.uk/swagger/ui/index (520 - legacy sandbox origin error)
+    - GET https://openbanking.zemplerbank.com/open-banking/v2.3/atms (000 - host does not resolve; no Open Data)
+    - GET https://api.zemplerbank.com/open-banking/v2.3/atms (000 - host does not resolve; no Open Data)
+  authModel:
+    openBanking:
+      standard: OBIE UK Open Banking Read/Write (FAPI profile)
+      mechanisms:
+        - OAuth2 / OpenID Connect
+        - mutual-TLS client authentication
+        - PSD2 strong customer authentication
+        - OBIE / eIDAS certificates via Open Banking Directory
+      verifiedLive: false
+      note: Standard OBIE/FAPI model per OBIE conformance; not independently verified - no public OIDC discovery document reachable.
+    firstParty:
+      note: Proprietary partner APIs require developer-portal onboarding and a direct commercial relationship; exact scheme (token/mTLS/API key) not exposed on public pages.
+  openDataConfirmed: false
+  openDataBaseURL: ''
+specProvenance:
+  standard: OBIE UK Open Banking Read/Write API Standard
+  version: 3.1.11
+  source: https://github.com/OpenBankingUK/read-write-api-specs (dist/openapi)
+  proprietary: false
+  note: |
+    The three specs in openapi/ (Account Information, Payment Initiation,
+    Confirmation of Funds) are the canonical shared OBIE Read/Write v3.1.11
+    documents that Cashplus/Zempler conforms to as an FCA-authorised ASPSP -
+    harvested verbatim from the official OpenBankingUK repository. They are the
+    SHARED STANDARD, not a Cashplus-proprietary contract; Cashplus does not
+    publish a materially divergent public OpenAPI, and its own portal swagger
+    sits behind an authenticated developer session. The seven first-party
+    partner APIs (Identity/Accounts/Applications/Eligibility/Payments/Products/
+    Transactions) are documented but no downloadable OpenAPI was publicly
+    retrievable, so none was harvested for them.
+sources:
+  - url: https://developer.zemplerbank.com/
+    type: DeveloperPortal
+    note: Live first-party + Open Banking developer portal (Cashplus rebranded to Zempler).
+  - url: https://www.zemplerbank.com/api/
+    type: Documentation
+    note: Open Banking / API overview page listing the API families.
+  - url: https://www.zemplerbank.com/api-developer/
+    type: Documentation
+    note: Developer overview; enumerates Identity, Accounts, Applications, Eligibility, Payments, Products, Transactions plus OBIE APIs.
+  - url: https://directory.openbanking.org.uk/
+    type: Authentication
+    note: Open Banking Directory - onboarding path for TPP access to the OBIE Read/Write APIs.
+  - url: https://github.com/OpenBankingUK/read-write-api-specs
+    type: OpenAPI
+    note: Canonical OBIE Read/Write v3.1.11 specs Cashplus/Zempler conforms to.
+  - url: https://en.wikipedia.org/wiki/Zempler_Bank
+    type: Reference
+    note: Corporate facts - founding 2005, banking licence 2021, July 2024 Cashplus-to-Zempler rebrand, Access Bank UK 2026 acquisition, FCA/PRA.
+  - url: https://www.openbankingtracker.com/provider/cashplus
+    type: Reference
+    note: Third-party Open Banking tracker confirming Cashplus AIS/PIS products and legacy sandbox host apisandbox.mycashplus.co.uk.
+actions:
+  apisYmlUpdated: true
+  openapiHarvested:
+    - openapi/cashplus-account-information-openapi.yml
+    - openapi/cashplus-payment-initiation-openapi.yml
+    - openapi/cashplus-confirmation-of-funds-openapi.yml
+  reason: |
+    Cashplus (now Zempler) exposes a real developer platform with seven
+    documented first-party partner APIs and a PSD2/OBIE Read/Write Open Banking
+    surface (AIS/PIS/CBPII). The three OBIE v3.1.11 standard specs were harvested
+    verbatim with provenance clearly marked as the shared standard, not a
+    proprietary contract. No unauthenticated Open Data endpoint exists (non-CMA9
+    challenger), and OBIE/FAPI auth is documented but not live-verified because
+    no public OIDC discovery document is reachable. Base URLs were left empty
+    rather than fabricated. Pricing/access derivation is left to the enrichment
+    pipeline.
