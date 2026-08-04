@@ -15,7 +15,8 @@ surfaces:
   graphql: null
   mcp:
     url: null
-    status: candidate (no hosted server)
+    status: candidate
+    status_raw: candidate
 crosswalk:
   - { tool: list_accounts, category: accounts, rest: [GetAccounts], binding: rest, confidence: high }
   - { tool: get_account, category: accounts, rest: [GetAccountsAccountId], binding: rest, confidence: high }
