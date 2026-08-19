@@ -1,0 +1,2202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Payment Initiation API",
+    "version": "3.1.11"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domestic Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Domestic Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/domestic-payment-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Domestic Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-payment-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Payment Consents Funds Confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-payment-consents/:ConsentId/funds-confirmation",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Payment Consents Funds Confirmation"
+        },
+        {
+          "info": {
+            "name": "Create Domestic Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/domestic-payments",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Domestic Payments"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-payments/:DomesticPaymentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DomesticPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "DomesticPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Payments"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-payments/:DomesticPaymentId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DomesticPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "DomesticPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        },
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-scheduled-payments/:DomesticScheduledPaymentId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DomesticScheduledPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "DomesticScheduledPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        },
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-standing-orders/:DomesticStandingOrderId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DomesticStandingOrderId",
+                "value": "",
+                "type": "path",
+                "description": "DomesticStandingOrderId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        },
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/file-payments/:FilePaymentId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FilePaymentId",
+                "value": "",
+                "type": "path",
+                "description": "FilePaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        },
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-payments/:InternationalPaymentId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "InternationalPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "InternationalPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        },
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-scheduled-payments/:InternationalScheduledPaymentId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "InternationalScheduledPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "InternationalScheduledPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        },
+        {
+          "info": {
+            "name": "Get Payment Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-standing-orders/:InternationalStandingOrderPaymentId/payment-details",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "InternationalStandingOrderPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "InternationalStandingOrderPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Payment Details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Domestic Scheduled Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Domestic Scheduled Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/domestic-scheduled-payment-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Domestic Scheduled Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Scheduled Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-scheduled-payment-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Scheduled Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Create Domestic Scheduled Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/domestic-scheduled-payments",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Domestic Scheduled Payments"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Scheduled Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-scheduled-payments/:DomesticScheduledPaymentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DomesticScheduledPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "DomesticScheduledPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Scheduled Payments"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Domestic Standing Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Domestic Standing Order Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/domestic-standing-order-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Domestic Standing Order Consents"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Standing Order Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-standing-order-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Standing Order Consents"
+        },
+        {
+          "info": {
+            "name": "Create Domestic Standing Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/domestic-standing-orders",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Domestic Standing Orders"
+        },
+        {
+          "info": {
+            "name": "Get Domestic Standing Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/domestic-standing-orders/:DomesticStandingOrderId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DomesticStandingOrderId",
+                "value": "",
+                "type": "path",
+                "description": "DomesticStandingOrderId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Domestic Standing Orders"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create File Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/file-payment-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create File Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get File Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/file-payment-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get File Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get File Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/file-payment-consents/:ConsentId/file",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get File Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Create File Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/file-payment-consents/:ConsentId/file",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create File Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Create File Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/file-payments",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create File Payments"
+        },
+        {
+          "info": {
+            "name": "Get File Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/file-payments/:FilePaymentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FilePaymentId",
+                "value": "",
+                "type": "path",
+                "description": "FilePaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get File Payments"
+        },
+        {
+          "info": {
+            "name": "Get File Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/file-payments/:FilePaymentId/report-file",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FilePaymentId",
+                "value": "",
+                "type": "path",
+                "description": "FilePaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get File Payments"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "International Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create International Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/international-payment-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create International Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get International Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-payment-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get International Payment Consents Funds Confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-payment-consents/:ConsentId/funds-confirmation",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Payment Consents Funds Confirmation"
+        },
+        {
+          "info": {
+            "name": "Create International Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/international-payments",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create International Payments"
+        },
+        {
+          "info": {
+            "name": "Get International Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-payments/:InternationalPaymentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "InternationalPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "InternationalPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Payments"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "International Scheduled Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create International Scheduled Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/international-scheduled-payment-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create International Scheduled Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get International Scheduled Payment Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-scheduled-payment-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Scheduled Payment Consents"
+        },
+        {
+          "info": {
+            "name": "Get International Scheduled Payment Consents Funds Confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-scheduled-payment-consents/:ConsentId/funds-confirmation",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Scheduled Payment Consents Funds Confirmation"
+        },
+        {
+          "info": {
+            "name": "Create International Scheduled Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/international-scheduled-payments",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create International Scheduled Payments"
+        },
+        {
+          "info": {
+            "name": "Get International Scheduled Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-scheduled-payments/:InternationalScheduledPaymentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "InternationalScheduledPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "InternationalScheduledPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Scheduled Payments"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "International Standing Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create International Standing Order Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/international-standing-order-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create International Standing Order Consents"
+        },
+        {
+          "info": {
+            "name": "Get International Standing Order Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-standing-order-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Standing Order Consents"
+        },
+        {
+          "info": {
+            "name": "Create International Standing Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/pisp/international-standing-orders",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-jws-signature",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create International Standing Orders"
+        },
+        {
+          "info": {
+            "name": "Get International Standing Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/pisp/international-standing-orders/:InternationalStandingOrderPaymentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "InternationalStandingOrderPaymentId",
+                "value": "",
+                "type": "path",
+                "description": "InternationalStandingOrderPaymentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get International Standing Orders"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

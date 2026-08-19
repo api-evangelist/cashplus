@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Confirmation of Funds API Specification",
+    "version": "3.1.11"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funds Confirmations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Funds Confirmation Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/cbpii/funds-confirmation-consents",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Funds Confirmation Consent"
+        },
+        {
+          "info": {
+            "name": "Get Funds Confirmation Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/open-banking/v3.1/cbpii/funds-confirmation-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Funds Confirmation Consent"
+        },
+        {
+          "info": {
+            "name": "Delete Funds Confirmation Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/open-banking/v3.1/cbpii/funds-confirmation-consents/:ConsentId",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ConsentId",
+                "value": "",
+                "type": "path",
+                "description": "ConsentId"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete Funds Confirmation Consent"
+        },
+        {
+          "info": {
+            "name": "Create Funds Confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/open-banking/v3.1/cbpii/funds-confirmations",
+            "headers": [
+              {
+                "name": "x-fapi-auth-date",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-customer-user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://authserver.example/authorization",
+              "accessTokenUrl": "https://authserver.example/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Funds Confirmation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
