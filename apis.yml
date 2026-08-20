@@ -22,6 +22,19 @@ description: >-
   Transactions APIs for embedded and commercial integrations.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
+- Financial-Services
+- Banking
+- Open Banking
+- PSD2
+- OBIE
+- FAPI
+- United Kingdom
+- Payments
+- Account Information
+- Challenger Bank
+- Business Banking
+- Fintech
+tags_raw:
 - Financial Services
 - Banking
 - Open Banking
@@ -139,6 +152,10 @@ apis:
   humanURL: https://developer.zemplerbank.com/developer-guides/api/accounts
   baseURL: ''
   tags:
+  - Account
+  - Balances
+  - Partner API
+  tags_raw:
   - Accounts
   - Balances
   - Partner API
@@ -156,6 +173,10 @@ apis:
   humanURL: https://developer.zemplerbank.com/developer-guides/api/applications
   baseURL: ''
   tags:
+  - Application
+  - Onboarding
+  - Partner API
+  tags_raw:
   - Applications
   - Onboarding
   - Partner API
@@ -207,6 +228,9 @@ apis:
   humanURL: https://developer.zemplerbank.com/developer-guides/api/products
   baseURL: ''
   tags:
+  - Product
+  - Partner API
+  tags_raw:
   - Products
   - Partner API
   properties:
@@ -223,6 +247,9 @@ apis:
   humanURL: https://developer.zemplerbank.com/developer-guides/api/transactions
   baseURL: ''
   tags:
+  - Transaction
+  - Partner API
+  tags_raw:
   - Transactions
   - Partner API
   properties:
