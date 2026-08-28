@@ -20,6 +20,18 @@ description: >-
   surface it runs a first-party partner/developer platform documenting proprietary
   Identity, Accounts, Applications, Eligibility, Payments, Products, and
   Transactions APIs for embedded and commercial integrations.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Financial-Services
