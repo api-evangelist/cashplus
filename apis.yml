@@ -473,6 +473,9 @@ apis:
   - type: APIReference
     url: https://www.zemplerbank.com/api/
 common:
+- type: CapabilityMap
+  url: capabilities/cashplus-capability-edges.yml
+  name: Cashplus Bank Business Capability Map
 - type: DomainSecurity
   url: security/cashplus-domain-security.yml
 - type: AgenticAccess

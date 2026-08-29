@@ -1,0 +1,144 @@
+slug: cashplus
+provider: Cashplus Bank
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 13
+edges:
+- tag: Domestic Payments
+  spec_file: cashplus-domestic-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.92
+  evidence: POST /domestic-payments CreateDomesticPayments; "Swagger for Payment Initiation API Specification";
+    OBWriteDomesticConsent4, OBWriteFundsConfirmationResponse1
+  reason: 'Explicitly a UK Open Banking payment initiation surface: consent creation, funds confirmation
+    and submission of domestic payment instructions.'
+- tag: Domestic Scheduled Payments
+  spec_file: cashplus-domestic-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /domestic-scheduled-payments CreateDomesticScheduledPayments; OBWriteDomesticScheduledConsent4
+  reason: Initiation and authorisation of future-dated domestic payment instructions under the Payment
+    Initiation API specification.
+- tag: International Payments
+  spec_file: cashplus-international-payments-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.9
+  evidence: POST /international-payments CreateInternationalPayments; OBWriteInternationalConsentResponse6,
+    OBWriteInternational3
+  reason: Initiation of cross-border payment instructions with international consent and funds confirmation
+    — cross-border payment management.
+- tag: Domestic Standing Orders
+  spec_file: cashplus-domestic-standing-orders-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.88
+  evidence: POST /domestic-standing-orders CreateDomesticStandingOrders; OBWriteDomesticStandingOrderConsent5
+  reason: Capture, consent and authorisation of recurring domestic standing order payment instructions
+    — payment initiation.
+- tag: File Payments
+  spec_file: cashplus-file-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /file-payments CreateFilePayments; OBWriteFileConsentResponse4; "Swagger for Payment
+    Initiation API Specification"
+  reason: Bulk/batch payment instruction submission via file upload with consent and report retrieval
+    — payment instruction capture and authorisation.
+- tag: International Scheduled Payments
+  spec_file: cashplus-international-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.85
+  evidence: POST /international-scheduled-payments  CreateInternationalScheduledPayments  Create International
+    Scheduled Payments; schema OBWriteInternationalScheduledConsentResponse6
+  reason: UK Open Banking Payment Initiation API for international (cross-border) scheduled payments —
+    consent creation, funds confirmation and payment submission. Squarely Payments & Card Management,
+    cross-border sub-capability.
+- tag: International Standing Orders
+  spec_file: cashplus-international-standing-orders-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.85
+  evidence: POST /international-standing-orders  CreateInternationalStandingOrders  Create International
+    Standing Orders
+  reason: Payment initiation of recurring international standing orders with consent capture — cross-border
+    payment management.
+- tag: Parties
+  spec_file: cashplus-parties-api-openapi.yml
+  capability_id: BC-1300.40
+  capability_id_l1: BC-1300
+  capability_name: Customer Information Management
+  confidence: 0.8
+  evidence: GET /party  GetParty  Get Parties; schemas OBReadParty3, FullLegalName, OBPartyRelationships1,
+    OBExternalAccountRole1Code
+  reason: Returns the account holder / party record — legal name, address, party type, account role and
+    relationships — i.e. banking customer information management.
+- tag: Products
+  spec_file: cashplus-products-api-openapi.yml
+  capability_id: BC-1310.10
+  capability_id_l1: BC-1310
+  capability_name: Product Catalogue Management
+  confidence: 0.8
+  evidence: GET /products  GetProducts  Get Products; schemas OB_OverdraftFeeType1Code, OB_FeeFrequency1Code_4,
+    OB_MinMaxType1Code
+  reason: Open Banking product information endpoint exposing banking product master data with fees, rates
+    and limits — banking product catalogue/parameters.
+- tag: Accounts
+  spec_file: cashplus-accounts-api-openapi.yml
+  capability_id: BC-1330.10
+  capability_id_l1: BC-1330
+  capability_name: Deposit Account Management
+  confidence: 0.7
+  evidence: GET /accounts GetAccounts; schemas OBAccount6, OBExternalAccountType1Code, OBExternalAccountSubType1Code,
+    OpeningDate, MaturityDate
+  reason: Read access to the bank's current/deposit account records for a challenger bank focused on business
+    and personal current accounts; maps to deposit account management. Read-only nature slightly lowers
+    confidence on the sub-capability.
+- tag: Payment Details
+  spec_file: cashplus-payment-details-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.7
+  evidence: GET /domestic-payments/{DomesticPaymentId}/payment-details  Get Payment Details; schema OBWritePaymentDetailsResponse1
+  reason: Retrieves processing status/details of submitted domestic, file and international payment instructions
+    across the payment rails — payment processing management.
+- tag: Scheduled Payments
+  spec_file: cashplus-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: GET /accounts/{AccountId}/scheduled-payments  GetAccountsAccountIdScheduledPayments  Get Scheduled
+    Payments; schema OBReadScheduledPayment3
+  reason: Read-only retrieval of future-dated payment instructions held on a banking account; clearly
+    payments management but sits between payment initiation and account information, so no L2 asserted.
+- tag: Standing Orders
+  spec_file: cashplus-standing-orders-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: GET /standing-orders  GetStandingOrders  Get Standing Orders; schemas OBReadStandingOrder6,
+    NextPaymentDateTime, StandingOrderId
+  reason: Retrieval of recurring standing-order payment instructions on an account — payments management;
+    L2 left null as this is an information-read rather than initiation or clearing.
