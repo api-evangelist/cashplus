@@ -210,6 +210,8 @@ apis:
   description: The Accounts API from Cashplus Bank — 2 operation(s) for accounts.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -412,6 +414,8 @@ apis:
   description: The Products API from Cashplus Bank — 2 operation(s) for products.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -464,6 +468,8 @@ apis:
   description: The Transactions API from Cashplus Bank — 3 operation(s) for transactions.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
