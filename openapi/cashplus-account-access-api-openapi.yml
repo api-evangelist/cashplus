@@ -128,7 +128,171 @@ paths:
       - TPPOAuth2Security:
         - accounts
 components:
+  responses:
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
+    403Error:
+      description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    200AccountAccessConsentsConsentIdRead:
+      description: Account Access Consents Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadConsentResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadConsentResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadConsentResponse1'
+    204AccountAccessConsentsConsentIdDeleted:
+      description: Account Access Consents Deleted
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    201AccountAccessConsentsCreated:
+      description: Account Access Consents Created
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadConsentResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadConsentResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadConsentResponse1'
+    415Error:
+      description: Unsupported Media Type
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
   schemas:
+    Links:
+      type: object
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      additionalProperties: false
+      required:
+      - Self
     OBReadConsent1:
       type: object
       required:
@@ -183,10 +347,60 @@ components:
         Risk:
           $ref: '#/components/schemas/OBRisk2'
       additionalProperties: false
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
+    OBError1:
+      type: object
+      properties:
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
+          type: string
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
+        Message:
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
+      required:
+      - ErrorCode
+      - Message
+      additionalProperties: false
+      minProperties: 1
     OBReadConsentResponse1:
       type: object
       required:
@@ -266,97 +480,8 @@ components:
         Meta:
           $ref: '#/components/schemas/Meta'
       additionalProperties: false
-    OBError1:
-      type: object
-      properties:
-        ErrorCode:
-          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
-          type: string
-          x-namespaced-enum:
-          - UK.OBIE.Field.Expected
-          - UK.OBIE.Field.Invalid
-          - UK.OBIE.Field.InvalidDate
-          - UK.OBIE.Field.Missing
-          - UK.OBIE.Field.Unexpected
-          - UK.OBIE.Header.Invalid
-          - UK.OBIE.Header.Missing
-          - UK.OBIE.Reauthenticate
-          - UK.OBIE.Resource.ConsentMismatch
-          - UK.OBIE.Resource.InvalidConsentStatus
-          - UK.OBIE.Resource.InvalidFormat
-          - UK.OBIE.Resource.NotFound
-          - UK.OBIE.Rules.AfterCutOffDateTime
-          - UK.OBIE.Rules.DuplicateReference
-          - UK.OBIE.Signature.Invalid
-          - UK.OBIE.Signature.InvalidClaim
-          - UK.OBIE.Signature.Malformed
-          - UK.OBIE.Signature.Missing
-          - UK.OBIE.Signature.MissingClaim
-          - UK.OBIE.Signature.Unexpected
-          - UK.OBIE.UnexpectedError
-          - UK.OBIE.Unsupported.AccountIdentifier
-          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
-          - UK.OBIE.Unsupported.Currency
-          - UK.OBIE.Unsupported.Frequency
-          - UK.OBIE.Unsupported.LocalInstrument
-          - UK.OBIE.Unsupported.Scheme
-        Message:
-          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
-
-            OBIE doesn''t standardise this field'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Path:
-          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
-          type: string
-          minLength: 1
-          maxLength: 500
-        Url:
-          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
-          type: string
-      required:
-      - ErrorCode
-      - Message
-      additionalProperties: false
-      minProperties: 1
-    Meta:
-      title: MetaData
-      type: object
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-      additionalProperties: false
-    Links:
-      type: object
-      description: Links relevant to the payload
-      properties:
-        Self:
-          type: string
-          format: uri
-        First:
-          type: string
-          format: uri
-        Prev:
-          type: string
-          format: uri
-        Next:
-          type: string
-          format: uri
-        Last:
-          type: string
-          format: uri
-      additionalProperties: false
-      required:
-      - Self
-    StatusUpdateDateTime:
-      description: "Date and time at which the resource status was updated.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
       format: date-time
     OBErrorResponse1:
@@ -388,158 +513,40 @@ components:
       - Message
       - Errors
       additionalProperties: false
-    CreationDateTime:
-      description: "Date and time at which the resource was created.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
     OBRisk2:
       description: The Risk section is sent by the initiating party to the ASPSP. It is used to specify additional details for risk scoring for Account Info.
       type: object
       properties: {}
       additionalProperties: false
-  responses:
-    415Error:
-      description: Unsupported Media Type
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200AccountAccessConsentsConsentIdRead:
-      description: Account Access Consents Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadConsentResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadConsentResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadConsentResponse1'
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          schema:
-            type: string
-    403Error:
-      description: Forbidden
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    201AccountAccessConsentsCreated:
-      description: Account Access Consents Created
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadConsentResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadConsentResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadConsentResponse1'
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    204AccountAccessConsentsConsentIdDeleted:
-      description: Account Access Consents Deleted
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    500Error:
-      description: Internal Server Error
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
+    CreationDateTime:
+      description: "Date and time at which the resource was created.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
+    StatusUpdateDateTime:
+      description: "Date and time at which the resource status was updated.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
   parameters:
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
     x-fapi-customer-ip-address:
       in: header
       name: x-fapi-customer-ip-address
@@ -554,18 +561,19 @@ components:
       required: false
       schema:
         type: string
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
     Authorization:
       in: header
       name: Authorization
       required: true
       description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
       schema:
         type: string
     ConsentId:
@@ -575,14 +583,6 @@ components:
       required: true
       schema:
         type: string
-    x-fapi-auth-date:
-      in: header
-      name: x-fapi-auth-date
-      required: false
-      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
-      schema:
-        type: string
-        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2

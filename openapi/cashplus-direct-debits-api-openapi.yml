@@ -86,38 +86,36 @@ paths:
         - accounts
 components:
   schemas:
-    DirectDebitId:
-      description: A unique and immutable identifier used to identify the direct debit resource. This identifier has no meaning to the account owner.
-      type: string
-      minLength: 1
-      maxLength: 40
-    AccountId:
-      description: A unique and immutable identifier used to identify the account resource. This identifier has no meaning to the account owner.
-      type: string
-      minLength: 1
-      maxLength: 40
     OBActiveCurrencyAndAmount_SimpleType:
       description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
       type: string
       pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
-    MandateIdentification:
-      description: Direct Debit reference. For AUDDIS service users provide Core Reference. For non AUDDIS service users provide Core reference if possible or last used reference.
-      type: string
-      minLength: 1
-      maxLength: 35
     PreviousPaymentDateTime:
       description: "Date of most recent direct debit collection.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
       format: date-time
-    Name_2:
-      description: Name of Service User.
-      type: string
-      minLength: 1
-      maxLength: 70
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
+    Links:
+      type: object
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      additionalProperties: false
+      required:
+      - Self
     OBError1:
       type: object
       properties:
@@ -172,41 +170,17 @@ components:
       - Message
       additionalProperties: false
       minProperties: 1
-    Meta:
-      title: MetaData
+    OBActiveOrHistoricCurrencyAndAmount_0:
       type: object
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-      additionalProperties: false
-    Links:
-      type: object
-      description: Links relevant to the payload
-      properties:
-        Self:
-          type: string
-          format: uri
-        First:
-          type: string
-          format: uri
-        Prev:
-          type: string
-          format: uri
-        Next:
-          type: string
-          format: uri
-        Last:
-          type: string
-          format: uri
-      additionalProperties: false
       required:
-      - Self
+      - Amount
+      - Currency
+      description: The amount of the most recent direct debit collection.
+      properties:
+        Amount:
+          $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
+        Currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode_1'
     OBReadDirectDebit2:
       type: object
       required:
@@ -256,6 +230,29 @@ components:
         Meta:
           $ref: '#/components/schemas/Meta'
       additionalProperties: false
+    MandateIdentification:
+      description: Direct Debit reference. For AUDDIS service users provide Core Reference. For non AUDDIS service users provide Core reference if possible or last used reference.
+      type: string
+      minLength: 1
+      maxLength: 35
+    ActiveOrHistoricCurrencyCode_1:
+      description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
+      type: string
+      pattern: ^[A-Z]{3,3}$
+    DirectDebitId:
+      description: A unique and immutable identifier used to identify the direct debit resource. This identifier has no meaning to the account owner.
+      type: string
+      minLength: 1
+      maxLength: 40
+    Name_2:
+      description: Name of Service User.
+      type: string
+      minLength: 1
+      maxLength: 70
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
     OBErrorResponse1:
       description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
       type: object
@@ -285,28 +282,47 @@ components:
       - Message
       - Errors
       additionalProperties: false
-    ActiveOrHistoricCurrencyCode_1:
-      description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
+    AccountId:
+      description: A unique and immutable identifier used to identify the account resource. This identifier has no meaning to the account owner.
       type: string
-      pattern: ^[A-Z]{3,3}$
+      minLength: 1
+      maxLength: 40
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
     OBExternalDirectDebitStatus1Code:
       description: Specifies the status of the direct debit in code form.
       type: string
       enum:
       - Active
       - Inactive
-    OBActiveOrHistoricCurrencyAndAmount_0:
-      type: object
-      required:
-      - Amount
-      - Currency
-      description: The amount of the most recent direct debit collection.
-      properties:
-        Amount:
-          $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
-        Currency:
-          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode_1'
   responses:
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
     404Error:
       description: Not found
       headers:
@@ -315,24 +331,6 @@ components:
           required: true
           schema:
             type: string
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
     429Error:
       description: Too Many Requests
       headers:
@@ -362,8 +360,8 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    200DirectDebitsRead:
-      description: Direct Debits Read
+    400Error:
+      description: Bad request
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -373,38 +371,14 @@ components:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/OBReadDirectDebit2'
+            $ref: '#/components/schemas/OBErrorResponse1'
         application/json:
           schema:
-            $ref: '#/components/schemas/OBReadDirectDebit2'
+            $ref: '#/components/schemas/OBErrorResponse1'
         application/jose+jwe:
           schema:
-            $ref: '#/components/schemas/OBReadDirectDebit2'
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200AccountsAccountIdDirectDebitsRead:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    200DirectDebitsRead:
       description: Direct Debits Read
       headers:
         x-fapi-interaction-id:
@@ -440,19 +414,45 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
+    200AccountsAccountIdDirectDebitsRead:
+      description: Direct Debits Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadDirectDebit2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadDirectDebit2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadDirectDebit2'
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
   parameters:
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
     x-fapi-customer-ip-address:
       in: header
       name: x-fapi-customer-ip-address
       required: false
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
-      schema:
-        type: string
-    AccountId:
-      name: AccountId
-      in: path
-      description: AccountId
-      required: true
       schema:
         type: string
     x-customer-user-agent:
@@ -462,18 +462,18 @@ components:
       required: false
       schema:
         type: string
+    AccountId:
+      name: AccountId
+      in: path
+      description: AccountId
+      required: true
+      schema:
+        type: string
     Authorization:
       in: header
       name: Authorization
       required: true
       description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
       schema:
         type: string
     x-fapi-auth-date:
