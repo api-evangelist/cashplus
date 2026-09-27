@@ -42,7 +42,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
-- Financial-Services
+- Financial Services
 - Banking
 - Open Banking
 - PSD2
@@ -67,6 +67,7 @@ tags_raw:
 - Challenger Bank
 - Business Banking
 - Fintech
+- Financial-Services
 created: '2026-07-23'
 modified: '2026-09-16'
 specificationVersion: '0.23'
@@ -86,26 +87,6 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.zemplerbank.com/developer-guides/api/identity
-  - type: APIReference
-    url: https://developer.zemplerbank.com/
-- aid: cashplus:cashplus-accounts-api
-  name: Cashplus Accounts API
-  description: First-party partner API to retrieve real-time account details and current balance for Cashplus/Zempler
-    business and personal current accounts, for reconciliation and financial analysis. Requires a direct
-    commercial relationship with the bank.
-  humanURL: https://developer.zemplerbank.com/developer-guides/api/accounts
-  baseURL: ''
-  tags:
-  - Account
-  - Balances
-  - Partner API
-  tags_raw:
-  - Accounts
-  - Balances
-  - Partner API
-  properties:
-  - type: Documentation
-    url: https://developer.zemplerbank.com/developer-guides/api/accounts
   - type: APIReference
     url: https://developer.zemplerbank.com/
 - aid: cashplus:cashplus-applications-api
@@ -159,40 +140,6 @@ apis:
     url: https://developer.zemplerbank.com/developer-guides/api/payments
   - type: APIReference
     url: https://developer.zemplerbank.com/
-- aid: cashplus:cashplus-products-api
-  name: Cashplus Products API
-  description: First-party partner API to query the catalogue of Cashplus/Zempler banking products. Requires
-    a direct commercial relationship with the bank.
-  humanURL: https://developer.zemplerbank.com/developer-guides/api/products
-  baseURL: ''
-  tags:
-  - Product
-  - Partner API
-  tags_raw:
-  - Products
-  - Partner API
-  properties:
-  - type: Documentation
-    url: https://developer.zemplerbank.com/developer-guides/api/products
-  - type: APIReference
-    url: https://developer.zemplerbank.com/
-- aid: cashplus:cashplus-transactions-api
-  name: Cashplus Transactions API
-  description: First-party partner API to search and filter transactions on Cashplus/Zempler accounts,
-    for reconciliation and reporting. Requires a direct commercial relationship with the bank.
-  humanURL: https://developer.zemplerbank.com/developer-guides/api/transactions
-  baseURL: ''
-  tags:
-  - Transaction
-  - Partner API
-  tags_raw:
-  - Transactions
-  - Partner API
-  properties:
-  - type: Documentation
-    url: https://developer.zemplerbank.com/developer-guides/api/transactions
-  - type: APIReference
-    url: https://developer.zemplerbank.com/
 - aid: cashplus:cashplus-account-access-api
   name: Cashplus Bank Account Access API
   description: The Account Access API from Cashplus Bank — 2 operation(s) for account access.
@@ -207,13 +154,19 @@ apis:
   - type: APIReference
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-accounts-api
-  name: Cashplus Bank Accounts API
-  description: The Accounts API from Cashplus Bank — 2 operation(s) for accounts.
-  humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  name: Cashplus Accounts API
+  description: First-party partner API to retrieve real-time account details and current balance for Cashplus/Zempler
+    business and personal current accounts, for reconciliation and financial analysis. Requires a direct
+    commercial relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/accounts
   tags:
   - Account
+  - Balances
+  - Partner API
   tags_raw:
   - Accounts
+  - Balances
+  - Partner API
   properties:
   - type: OpenAPI
     url: openapi/cashplus-accounts-api-openapi.yml
@@ -221,6 +174,11 @@ apis:
     url: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   - type: APIReference
     url: https://www.zemplerbank.com/api/
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/accounts
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+  baseURL: ''
 - aid: cashplus:cashplus-balances-api
   name: Cashplus Bank Balances API
   description: The Balances API from Cashplus Bank — 2 operation(s) for balances.
@@ -408,13 +366,16 @@ apis:
   - type: APIReference
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-products-api
-  name: Cashplus Bank Products API
-  description: The Products API from Cashplus Bank — 2 operation(s) for products.
-  humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  name: Cashplus Products API
+  description: First-party partner API to query the catalogue of Cashplus/Zempler banking products. Requires
+    a direct commercial relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/products
   tags:
   - Product
+  - Partner API
   tags_raw:
   - Products
+  - Partner API
   properties:
   - type: OpenAPI
     url: openapi/cashplus-products-api-openapi.yml
@@ -422,6 +383,11 @@ apis:
     url: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   - type: APIReference
     url: https://www.zemplerbank.com/api/
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/products
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+  baseURL: ''
 - aid: cashplus:cashplus-scheduled-payments-api
   name: Cashplus Bank Scheduled Payments API
   description: The Scheduled Payments API from Cashplus Bank — 2 operation(s) for scheduled payments.
@@ -462,13 +428,16 @@ apis:
   - type: APIReference
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-transactions-api
-  name: Cashplus Bank Transactions API
-  description: The Transactions API from Cashplus Bank — 3 operation(s) for transactions.
-  humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
+  name: Cashplus Transactions API
+  description: First-party partner API to search and filter transactions on Cashplus/Zempler accounts, for
+    reconciliation and reporting. Requires a direct commercial relationship with the bank.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/transactions
   tags:
   - Transaction
+  - Partner API
   tags_raw:
   - Transactions
+  - Partner API
   properties:
   - type: OpenAPI
     url: openapi/cashplus-transactions-api-openapi.yml
@@ -476,6 +445,11 @@ apis:
     url: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   - type: APIReference
     url: https://www.zemplerbank.com/api/
+  - type: Documentation
+    url: https://developer.zemplerbank.com/developer-guides/api/transactions
+  - type: APIReference
+    url: https://developer.zemplerbank.com/
+  baseURL: ''
 common:
 - type: CapabilityMap
   url: capabilities/cashplus-capability-edges.yml
