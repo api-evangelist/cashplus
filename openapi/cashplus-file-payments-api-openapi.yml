@@ -309,36 +309,431 @@ paths:
       - TPPOAuth2Security:
         - payments
 components:
+  responses:
+    403Error:
+      description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    201FilePaymentsCreated:
+      description: File Payments Created
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileResponse3'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileResponse3'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileResponse3'
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200FilePaymentsFilePaymentIdReportFileRead:
+      description: File Payments Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/File'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/File'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/File'
+    201FilePaymentConsentsCreated:
+      description: File Payment Consents Created
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
+    200FilePaymentConsentsConsentIdFileCreated:
+      description: File Payment Consents Created
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200FilePaymentConsentsConsentIdRead:
+      description: File Payment Consents Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200FilePaymentsFilePaymentIdRead:
+      description: File Payments Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileResponse3'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileResponse3'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWriteFileResponse3'
+    200FilePaymentConsentsConsentIdFileRead:
+      description: File Payment Consents Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/File'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/File'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/File'
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    415Error:
+      description: Unsupported Media Type
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+  parameters:
+    ConsentId:
+      name: ConsentId
+      in: path
+      description: ConsentId
+      required: true
+      schema:
+        type: string
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      required: false
+      description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
+    x-idempotency-key:
+      name: x-idempotency-key
+      in: header
+      description: 'Every request will be processed only once per x-idempotency-key.  The
+
+        Idempotency Key will be valid for 24 hours.
+
+        '
+      required: true
+      schema:
+        type: string
+        maxLength: 40
+        pattern: ^(?!\s)(.*)(\S)$
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
+    x-jws-signature:
+      in: header
+      name: x-jws-signature
+      required: true
+      description: A detached JWS signature of the body of the payload.
+      schema:
+        type: string
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    FilePaymentId:
+      name: FilePaymentId
+      in: path
+      description: FilePaymentId
+      required: true
+      schema:
+        type: string
   schemas:
-    OBErrorResponse1:
-      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+    Meta:
+      title: MetaData
+      type: object
+      additionalProperties: false
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+    OBError1:
       type: object
       additionalProperties: false
       properties:
-        Code:
-          description: High level textual error code, to help categorize the errors.
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
           type: string
-          minLength: 1
-          maxLength: 40
-        Id:
-          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
-          type: string
-          minLength: 1
-          maxLength: 40
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
         Message:
-          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
           type: string
           minLength: 1
           maxLength: 500
-        Errors:
-          items:
-            $ref: '#/components/schemas/OBError1'
-          type: array
-          minItems: 1
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
       required:
-      - Code
+      - ErrorCode
       - Message
-      - Errors
+      minProperties: 1
     OBActiveCurrencyAndAmount_SimpleType:
       description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
       type: string
@@ -359,48 +754,6 @@ components:
         SecondaryIdentification:
           type: string
           description: ^ This is secondary identification of the account, as assigned by the account servicing institution.  This can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination) | Max34Text
-    OBSCASupportData1:
-      type: object
-      properties:
-        RequestedSCAExemptionType:
-          type: string
-          description: This field allows a PISP to request specific SCA Exemption for a Payment Initiation
-          enum:
-          - BillPayment
-          - ContactlessTravel
-          - EcommerceGoods
-          - EcommerceServices
-          - Kiosk
-          - Parking
-          - PartyToParty
-        AppliedAuthenticationApproach:
-          type: string
-          maxLength: 40
-          description: 'Specifies a character string with a maximum length of 40 characters.
-
-            Usage: This field indicates whether the PSU was subject to SCA performed by the TPP'
-          enum:
-          - CA
-          - SCA
-        ReferencePaymentOrderId:
-          type: string
-          maxLength: 40
-          minLength: 1
-          description: 'If the payment is recurring, then this field is populated with the transaction identifier of the previous payment occurrence so that the ASPSP can verify that the PISP, amount and the payee are the same as the previous occurrence. The value here refers to the payment id e.g. DomesticPaymentId  '
-      description: Supporting Data provided by TPP, when requesting SCA Exemption.
-    OBExternalPaymentChargeType1Code:
-      description: Charge type, in a coded form.
-      type: string
-      x-namespaced-enum:
-      - UK.OBIE.CHAPSOut
-    OBChargeBearerType1Code:
-      description: Specifies which party/parties will bear the charges associated with the processing of the payment transaction.
-      type: string
-      enum:
-      - BorneByCreditor
-      - BorneByDebtor
-      - FollowingServiceLevel
-      - Shared
     OBActiveOrHistoricCurrencyAndAmount:
       type: object
       additionalProperties: false
@@ -413,7 +766,11 @@ components:
           $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
         Currency:
           $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
-    OBWriteFileConsent3:
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
+    OBWriteFileConsentResponse4:
       type: object
       additionalProperties: false
       required:
@@ -423,8 +780,55 @@ components:
           type: object
           additionalProperties: false
           required:
+          - ConsentId
+          - CreationDateTime
+          - Status
+          - StatusUpdateDateTime
           - Initiation
           properties:
+            ConsentId:
+              description: 'OB: Unique identification as assigned by the ASPSP to uniquely identify the consent resource.'
+              type: string
+              minLength: 1
+              maxLength: 128
+            CreationDateTime:
+              description: "Date and time at which the resource was created.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+              type: string
+              format: date-time
+            Status:
+              description: Specifies the status of consent resource in code form.
+              type: string
+              enum:
+              - Authorised
+              - AwaitingAuthorisation
+              - AwaitingUpload
+              - Consumed
+              - Rejected
+            StatusUpdateDateTime:
+              description: "Date and time at which the consent resource status was updated.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+              type: string
+              format: date-time
+            CutOffDateTime:
+              description: "Specified cut-off date and time for the payment consent.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+              type: string
+              format: date-time
+            Charges:
+              type: array
+              items:
+                type: object
+                additionalProperties: false
+                description: Set of elements used to provide details of a charge for the payment initiation.
+                required:
+                - ChargeBearer
+                - Type
+                - Amount
+                properties:
+                  ChargeBearer:
+                    $ref: '#/components/schemas/OBChargeBearerType1Code'
+                  Type:
+                    $ref: '#/components/schemas/OBExternalPaymentChargeType1Code'
+                  Amount:
+                    $ref: '#/components/schemas/OBActiveOrHistoricCurrencyAndAmount'
             Initiation:
               type: object
               additionalProperties: false
@@ -525,33 +929,59 @@ components:
                   format: date-time
             SCASupportData:
               $ref: '#/components/schemas/OBSCASupportData1'
+            Debtor:
+              $ref: '#/components/schemas/OBCashAccountDebtor4'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
+    File:
+      type: object
+      additionalProperties: false
+      properties: {}
+    OBErrorResponse1:
+      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      type: object
+      additionalProperties: false
+      properties:
+        Code:
+          description: High level textual error code, to help categorize the errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Id:
+          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Message:
+          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Errors:
+          items:
+            $ref: '#/components/schemas/OBError1'
+          type: array
+          minItems: 1
+      required:
+      - Code
+      - Message
+      - Errors
+    OBExternalPaymentChargeType1Code:
+      description: Charge type, in a coded form.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.CHAPSOut
     Identification_0:
       description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
       type: string
       minLength: 1
       maxLength: 256
-    Links:
-      type: object
-      additionalProperties: false
-      description: Links relevant to the payload
-      properties:
-        Self:
-          type: string
-          format: uri
-        First:
-          type: string
-          format: uri
-        Prev:
-          type: string
-          format: uri
-        Next:
-          type: string
-          format: uri
-        Last:
-          type: string
-          format: uri
-      required:
-      - Self
+    ActiveOrHistoricCurrencyCode:
+      description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
+      type: string
+      pattern: ^[A-Z]{3,3}$
     OBWriteFileResponse3:
       type: object
       additionalProperties: false
@@ -726,21 +1156,7 @@ components:
           $ref: '#/components/schemas/Links'
         Meta:
           $ref: '#/components/schemas/Meta'
-    OBExternalAccountIdentification4Code:
-      description: Name of the identification scheme, in a coded form as published in an external list.
-      type: string
-      x-namespaced-enum:
-      - UK.OBIE.BBAN
-      - UK.OBIE.IBAN
-      - UK.OBIE.PAN
-      - UK.OBIE.Paym
-      - UK.OBIE.SortCodeAccountNumber
-      - UK.OBIE.Wallet
-    File:
-      type: object
-      additionalProperties: false
-      properties: {}
-    OBWriteFileConsentResponse4:
+    OBWriteFileConsent3:
       type: object
       additionalProperties: false
       required:
@@ -750,55 +1166,8 @@ components:
           type: object
           additionalProperties: false
           required:
-          - ConsentId
-          - CreationDateTime
-          - Status
-          - StatusUpdateDateTime
           - Initiation
           properties:
-            ConsentId:
-              description: 'OB: Unique identification as assigned by the ASPSP to uniquely identify the consent resource.'
-              type: string
-              minLength: 1
-              maxLength: 128
-            CreationDateTime:
-              description: "Date and time at which the resource was created.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-              type: string
-              format: date-time
-            Status:
-              description: Specifies the status of consent resource in code form.
-              type: string
-              enum:
-              - Authorised
-              - AwaitingAuthorisation
-              - AwaitingUpload
-              - Consumed
-              - Rejected
-            StatusUpdateDateTime:
-              description: "Date and time at which the consent resource status was updated.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-              type: string
-              format: date-time
-            CutOffDateTime:
-              description: "Specified cut-off date and time for the payment consent.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-              type: string
-              format: date-time
-            Charges:
-              type: array
-              items:
-                type: object
-                additionalProperties: false
-                description: Set of elements used to provide details of a charge for the payment initiation.
-                required:
-                - ChargeBearer
-                - Type
-                - Amount
-                properties:
-                  ChargeBearer:
-                    $ref: '#/components/schemas/OBChargeBearerType1Code'
-                  Type:
-                    $ref: '#/components/schemas/OBExternalPaymentChargeType1Code'
-                  Amount:
-                    $ref: '#/components/schemas/OBActiveOrHistoricCurrencyAndAmount'
             Initiation:
               type: object
               additionalProperties: false
@@ -899,75 +1268,6 @@ components:
                   format: date-time
             SCASupportData:
               $ref: '#/components/schemas/OBSCASupportData1'
-            Debtor:
-              $ref: '#/components/schemas/OBCashAccountDebtor4'
-        Links:
-          $ref: '#/components/schemas/Links'
-        Meta:
-          $ref: '#/components/schemas/Meta'
-    SecondaryIdentification:
-      description: "This is secondary identification of the account, as assigned by the account servicing institution. \nThis can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination)."
-      type: string
-      minLength: 1
-      maxLength: 34
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    OBError1:
-      type: object
-      additionalProperties: false
-      properties:
-        ErrorCode:
-          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
-          type: string
-          x-namespaced-enum:
-          - UK.OBIE.Field.Expected
-          - UK.OBIE.Field.Invalid
-          - UK.OBIE.Field.InvalidDate
-          - UK.OBIE.Field.Missing
-          - UK.OBIE.Field.Unexpected
-          - UK.OBIE.Header.Invalid
-          - UK.OBIE.Header.Missing
-          - UK.OBIE.Reauthenticate
-          - UK.OBIE.Resource.ConsentMismatch
-          - UK.OBIE.Resource.InvalidConsentStatus
-          - UK.OBIE.Resource.InvalidFormat
-          - UK.OBIE.Resource.NotFound
-          - UK.OBIE.Rules.AfterCutOffDateTime
-          - UK.OBIE.Rules.DuplicateReference
-          - UK.OBIE.Signature.Invalid
-          - UK.OBIE.Signature.InvalidClaim
-          - UK.OBIE.Signature.Malformed
-          - UK.OBIE.Signature.Missing
-          - UK.OBIE.Signature.MissingClaim
-          - UK.OBIE.Signature.Unexpected
-          - UK.OBIE.UnexpectedError
-          - UK.OBIE.Unsupported.AccountIdentifier
-          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
-          - UK.OBIE.Unsupported.Currency
-          - UK.OBIE.Unsupported.Frequency
-          - UK.OBIE.Unsupported.LocalInstrument
-          - UK.OBIE.Unsupported.Scheme
-        Message:
-          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
-
-            OBIE doesn''t standardise this field'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Path:
-          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
-          type: string
-          minLength: 1
-          maxLength: 500
-        Url:
-          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
-          type: string
-      required:
-      - ErrorCode
-      - Message
-      minProperties: 1
     OBExternalLocalInstrument1Code:
       description: 'User community specific instrument.
 
@@ -986,28 +1286,85 @@ components:
       - UK.OBIE.SEPAInstantCreditTransfer
       - UK.OBIE.SWIFT
       - UK.OBIE.Target2
-    ActiveOrHistoricCurrencyCode:
-      description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
+    SecondaryIdentification:
+      description: "This is secondary identification of the account, as assigned by the account servicing institution. \nThis can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination)."
       type: string
-      pattern: ^[A-Z]{3,3}$
-    Meta:
-      title: MetaData
+      minLength: 1
+      maxLength: 34
+    OBSCASupportData1:
       type: object
-      additionalProperties: false
-      description: Meta Data relevant to the payload
       properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
+        RequestedSCAExemptionType:
+          type: string
+          description: This field allows a PISP to request specific SCA Exemption for a Payment Initiation
+          enum:
+          - BillPayment
+          - ContactlessTravel
+          - EcommerceGoods
+          - EcommerceServices
+          - Kiosk
+          - Parking
+          - PartyToParty
+        AppliedAuthenticationApproach:
+          type: string
+          maxLength: 40
+          description: 'Specifies a character string with a maximum length of 40 characters.
+
+            Usage: This field indicates whether the PSU was subject to SCA performed by the TPP'
+          enum:
+          - CA
+          - SCA
+        ReferencePaymentOrderId:
+          type: string
+          maxLength: 40
+          minLength: 1
+          description: 'If the payment is recurring, then this field is populated with the transaction identifier of the previous payment occurrence so that the ASPSP can verify that the PISP, amount and the payee are the same as the previous occurrence. The value here refers to the payment id e.g. DomesticPaymentId  '
+      description: Supporting Data provided by TPP, when requesting SCA Exemption.
+    OBChargeBearerType1Code:
+      description: Specifies which party/parties will bear the charges associated with the processing of the payment transaction.
+      type: string
+      enum:
+      - BorneByCreditor
+      - BorneByDebtor
+      - FollowingServiceLevel
+      - Shared
+    OBExternalAccountIdentification4Code:
+      description: Name of the identification scheme, in a coded form as published in an external list.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.BBAN
+      - UK.OBIE.IBAN
+      - UK.OBIE.PAN
+      - UK.OBIE.Paym
+      - UK.OBIE.SortCodeAccountNumber
+      - UK.OBIE.Wallet
     OBSupplementaryData1:
       type: object
       properties: {}
       additionalProperties: true
       description: Additional information that can not be captured in the structured fields and/or any other specific block.
+    Links:
+      type: object
+      additionalProperties: false
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      required:
+      - Self
     OBWriteFile2:
       type: object
       additionalProperties: false
@@ -1107,363 +1464,6 @@ components:
                       maxLength: 35
                 SupplementaryData:
                   $ref: '#/components/schemas/OBSupplementaryData1'
-  responses:
-    200FilePaymentsFilePaymentIdRead:
-      description: File Payments Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileResponse3'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileResponse3'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileResponse3'
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    500Error:
-      description: Internal Server Error
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    200FilePaymentConsentsConsentIdFileCreated:
-      description: File Payment Consents Created
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200FilePaymentConsentsConsentIdRead:
-      description: File Payment Consents Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
-    415Error:
-      description: Unsupported Media Type
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    404Error:
-      description: Not found
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200FilePaymentsFilePaymentIdReportFileRead:
-      description: File Payments Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/File'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/File'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/File'
-    200FilePaymentConsentsConsentIdFileRead:
-      description: File Payment Consents Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/File'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/File'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/File'
-    201FilePaymentConsentsCreated:
-      description: File Payment Consents Created
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileConsentResponse4'
-    403Error:
-      description: Forbidden
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    201FilePaymentsCreated:
-      description: File Payments Created
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileResponse3'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileResponse3'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteFileResponse3'
-  parameters:
-    x-idempotency-key:
-      name: x-idempotency-key
-      in: header
-      description: 'Every request will be processed only once per x-idempotency-key.  The
-
-        Idempotency Key will be valid for 24 hours.
-
-        '
-      required: true
-      schema:
-        type: string
-        maxLength: 40
-        pattern: ^(?!\s)(.*)(\S)$
-    x-fapi-auth-date:
-      in: header
-      name: x-fapi-auth-date
-      required: false
-      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
-      schema:
-        type: string
-        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
-    ConsentId:
-      name: ConsentId
-      in: path
-      description: ConsentId
-      required: true
-      schema:
-        type: string
-    Authorization:
-      in: header
-      name: Authorization
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    FilePaymentId:
-      name: FilePaymentId
-      in: path
-      description: FilePaymentId
-      required: true
-      schema:
-        type: string
-    x-fapi-customer-ip-address:
-      in: header
-      name: x-fapi-customer-ip-address
-      required: false
-      description: The PSU's IP address if the PSU is currently logged in with the TPP.
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
-    x-jws-signature:
-      in: header
-      name: x-jws-signature
-      required: true
-      description: A detached JWS signature of the body of the payload.
-      schema:
-        type: string
-    x-customer-user-agent:
-      in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
-      required: false
-      schema:
-        type: string
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2
