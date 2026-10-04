@@ -86,6 +86,22 @@ paths:
         - accounts
 components:
   responses:
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
     403Error:
       description: Forbidden
       headers:
@@ -104,6 +120,17 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
     500Error:
       description: Internal Server Error
       headers:
@@ -122,59 +149,6 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    404Error:
-      description: Not found
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          schema:
-            type: string
-    200AccountsAccountIdOffersRead:
-      description: Offers Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadOffer1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadOffer1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadOffer1'
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
     400Error:
       description: Bad request
       headers:
@@ -201,6 +175,32 @@ components:
           required: true
           schema:
             type: string
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200AccountsAccountIdOffersRead:
+      description: Offers Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadOffer1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadOffer1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadOffer1'
     200OffersRead:
       description: Offers Read
       headers:
@@ -220,11 +220,25 @@ components:
           schema:
             $ref: '#/components/schemas/OBReadOffer1'
   parameters:
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
     x-fapi-customer-ip-address:
       in: header
       name: x-fapi-customer-ip-address
       required: false
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
       schema:
         type: string
     x-fapi-auth-date:
@@ -235,13 +249,6 @@ components:
       schema:
         type: string
         pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
-    Authorization:
-      in: header
-      name: Authorization
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
     x-customer-user-agent:
       in: header
       name: x-customer-user-agent
@@ -256,81 +263,7 @@ components:
       required: true
       schema:
         type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
   schemas:
-    Meta:
-      title: MetaData
-      type: object
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-      additionalProperties: false
-    OBError1:
-      type: object
-      properties:
-        ErrorCode:
-          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
-          type: string
-          x-namespaced-enum:
-          - UK.OBIE.Field.Expected
-          - UK.OBIE.Field.Invalid
-          - UK.OBIE.Field.InvalidDate
-          - UK.OBIE.Field.Missing
-          - UK.OBIE.Field.Unexpected
-          - UK.OBIE.Header.Invalid
-          - UK.OBIE.Header.Missing
-          - UK.OBIE.Reauthenticate
-          - UK.OBIE.Resource.ConsentMismatch
-          - UK.OBIE.Resource.InvalidConsentStatus
-          - UK.OBIE.Resource.InvalidFormat
-          - UK.OBIE.Resource.NotFound
-          - UK.OBIE.Rules.AfterCutOffDateTime
-          - UK.OBIE.Rules.DuplicateReference
-          - UK.OBIE.Signature.Invalid
-          - UK.OBIE.Signature.InvalidClaim
-          - UK.OBIE.Signature.Malformed
-          - UK.OBIE.Signature.Missing
-          - UK.OBIE.Signature.MissingClaim
-          - UK.OBIE.Signature.Unexpected
-          - UK.OBIE.UnexpectedError
-          - UK.OBIE.Unsupported.AccountIdentifier
-          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
-          - UK.OBIE.Unsupported.Currency
-          - UK.OBIE.Unsupported.Frequency
-          - UK.OBIE.Unsupported.LocalInstrument
-          - UK.OBIE.Unsupported.Scheme
-        Message:
-          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
-
-            OBIE doesn''t standardise this field'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Path:
-          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
-          type: string
-          minLength: 1
-          maxLength: 500
-        Url:
-          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
-          type: string
-      required:
-      - ErrorCode
-      - Message
-      additionalProperties: false
-      minProperties: 1
     OBReadOffer1:
       type: object
       required:
@@ -419,14 +352,103 @@ components:
         Meta:
           $ref: '#/components/schemas/Meta'
       additionalProperties: false
-    OBActiveCurrencyAndAmount_SimpleType:
-      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
-      type: string
-      pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
+    Links:
+      type: object
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      additionalProperties: false
+      required:
+      - Self
     ActiveOrHistoricCurrencyCode_1:
       description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
       type: string
       pattern: ^[A-Z]{3,3}$
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+    OBError1:
+      type: object
+      properties:
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
+          type: string
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
+        Message:
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
+      required:
+      - ErrorCode
+      - Message
+      additionalProperties: false
+      minProperties: 1
+    OBActiveCurrencyAndAmount_SimpleType:
+      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
+      type: string
+      pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
     ISODateTime:
       description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
@@ -465,28 +487,6 @@ components:
       type: string
       minLength: 1
       maxLength: 40
-    Links:
-      type: object
-      description: Links relevant to the payload
-      properties:
-        Self:
-          type: string
-          format: uri
-        First:
-          type: string
-          format: uri
-        Prev:
-          type: string
-          format: uri
-        Next:
-          type: string
-          format: uri
-        Last:
-          type: string
-          format: uri
-      additionalProperties: false
-      required:
-      - Self
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2
