@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/cashplus/integrations
+- https://zapier.com/apps/cashplus-bank/integrations
+- https://n8n.io/integrations/cashplus/
+- https://composio.dev/toolkits/cashplus
+- https://monid.ai/tools/cashplus
+checked:
+- https://composio.dev/toolkits/cashplus
+- https://monid.ai/tools/cashplus
+- https://n8n.io/integrations/cashplus/
+- https://zapier.com/apps/cashplus-bank/integrations
+- https://zapier.com/apps/cashplus/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
