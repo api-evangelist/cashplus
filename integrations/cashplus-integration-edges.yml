@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/cashplus/integrations
 - https://zapier.com/apps/cashplus-bank/integrations
@@ -10,9 +10,27 @@ checked:
 - https://composio.dev/toolkits/cashplus
 - https://monid.ai/tools/cashplus
 - https://n8n.io/integrations/cashplus/
+- https://www.openbanking.org.uk/regulated-providers/advanced-payment-solutions-limited/
 - https://zapier.com/apps/cashplus-bank/integrations
 - https://zapier.com/apps/cashplus/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: UK Open Banking
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.openbanking.org.uk/regulated-providers/advanced-payment-solutions-limited/
+  contract_reference:
+    register: UK Open Banking regulated providers (OBL directory)
+    spec_file: null
+    role: Account Providers,Third Party Providers
+    registered_name: Zempler Bank Limited
+    register_id: https://register.fca.org.uk/s/firm?id=001b000000k3SAHAA2
+    matched_domain: zemplerbank.com
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
 templates: []
