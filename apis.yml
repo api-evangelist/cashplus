@@ -74,10 +74,11 @@ specificationVersion: '0.23'
 apis:
 - aid: cashplus:cashplus-identity-api
   name: Cashplus Identity API
-  description: First-party partner API for authentication and registration against the Cashplus/Zempler
-    developer platform, used to obtain credentials and tokens before calling the proprietary Accounts,
-    Payments, Applications, Eligibility, Products, and Transactions APIs. Requires a direct commercial
-    relationship with the bank.
+  description: >-
+    First-party partner API for authentication and registration against the Cashplus/Zempler developer
+    platform, used to obtain credentials and tokens before calling the proprietary Accounts, Payments,
+    Applications, Eligibility, Products, and Transactions APIs. Requires a direct commercial relationship
+    with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/identity
   baseURL: ''
   tags:
@@ -91,9 +92,10 @@ apis:
     url: https://developer.zemplerbank.com/
 - aid: cashplus:cashplus-applications-api
   name: Cashplus Applications API
-  description: First-party partner API to create applications that open new Cashplus/Zempler current accounts
-    programmatically, enabling embedded account onboarding within partner platforms. Requires a direct
-    commercial relationship with the bank.
+  description: >-
+    First-party partner API to create applications that open new Cashplus/Zempler current accounts programmatically,
+    enabling embedded account onboarding within partner platforms. Requires a direct commercial relationship
+    with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/applications
   baseURL: ''
   tags:
@@ -111,8 +113,9 @@ apis:
     url: https://developer.zemplerbank.com/
 - aid: cashplus:cashplus-eligibility-api
   name: Cashplus Eligibility API
-  description: First-party partner API for running credit card eligibility checks against Cashplus/Zempler
-    credit products. Requires a direct commercial relationship with the bank.
+  description: >-
+    First-party partner API for running credit card eligibility checks against Cashplus/Zempler credit
+    products. Requires a direct commercial relationship with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/eligibility
   baseURL: ''
   tags:
@@ -126,9 +129,10 @@ apis:
     url: https://developer.zemplerbank.com/
 - aid: cashplus:cashplus-payments-api
   name: Cashplus Payments API
-  description: First-party partner API to initiate single and batch domestic GBP payments at low cost
-    from Cashplus/Zempler accounts, marketed for partners as a lower-cost alternative to standard payment
-    rails. Requires a direct commercial relationship with the bank.
+  description: >-
+    First-party partner API to initiate single and batch domestic GBP payments at low cost from Cashplus/Zempler
+    accounts, marketed for partners as a lower-cost alternative to standard payment rails. Requires a
+    direct commercial relationship with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/payments
   baseURL: ''
   tags:
@@ -155,7 +159,8 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-accounts-api
   name: Cashplus Accounts API
-  description: First-party partner API to retrieve real-time account details and current balance for Cashplus/Zempler
+  description: >-
+    First-party partner API to retrieve real-time account details and current balance for Cashplus/Zempler
     business and personal current accounts, for reconciliation and financial analysis. Requires a direct
     commercial relationship with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/accounts
@@ -233,8 +238,8 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-domestic-scheduled-payments-api
   name: Cashplus Bank Domestic Scheduled Payments API
-  description: The Domestic Scheduled Payments API from Cashplus Bank — 4 operation(s) for domestic scheduled
-    payments.
+  description: >-
+    The Domestic Scheduled Payments API from Cashplus Bank — 4 operation(s) for domestic scheduled payments.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
   - Domestic Scheduled Payments
@@ -247,8 +252,8 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-domestic-standing-orders-api
   name: Cashplus Bank Domestic Standing Orders API
-  description: The Domestic Standing Orders API from Cashplus Bank — 4 operation(s) for domestic standing
-    orders.
+  description: >-
+    The Domestic Standing Orders API from Cashplus Bank — 4 operation(s) for domestic standing orders.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
   - Domestic Standing Orders
@@ -287,7 +292,8 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-international-payments-api
   name: Cashplus Bank International Payments API
-  description: The International Payments API from Cashplus Bank — 5 operation(s) for international payments.
+  description: >-
+    The International Payments API from Cashplus Bank — 5 operation(s) for international payments.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
   - International Payments
@@ -300,8 +306,9 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-international-scheduled-payments-api
   name: Cashplus Bank International Scheduled Payments API
-  description: The International Scheduled Payments API from Cashplus Bank — 5 operation(s) for international
-    scheduled payments.
+  description: >-
+    The International Scheduled Payments API from Cashplus Bank — 5 operation(s) for international scheduled
+    payments.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
   - International Scheduled Payments
@@ -314,8 +321,9 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-international-standing-orders-api
   name: Cashplus Bank International Standing Orders API
-  description: The International Standing Orders API from Cashplus Bank — 4 operation(s) for international
-    standing orders.
+  description: >-
+    The International Standing Orders API from Cashplus Bank — 4 operation(s) for international standing
+    orders.
   humanURL: https://developer.zemplerbank.com/developer-guides/open-banking/identity
   tags:
   - International Standing Orders
@@ -367,8 +375,9 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-products-api
   name: Cashplus Products API
-  description: First-party partner API to query the catalogue of Cashplus/Zempler banking products. Requires
-    a direct commercial relationship with the bank.
+  description: >-
+    First-party partner API to query the catalogue of Cashplus/Zempler banking products. Requires a direct
+    commercial relationship with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/products
   tags:
   - Product
@@ -429,8 +438,9 @@ apis:
     url: https://www.zemplerbank.com/api/
 - aid: cashplus:cashplus-transactions-api
   name: Cashplus Transactions API
-  description: First-party partner API to search and filter transactions on Cashplus/Zempler accounts, for
-    reconciliation and reporting. Requires a direct commercial relationship with the bank.
+  description: >-
+    First-party partner API to search and filter transactions on Cashplus/Zempler accounts, for reconciliation
+    and reporting. Requires a direct commercial relationship with the bank.
   humanURL: https://developer.zemplerbank.com/developer-guides/api/transactions
   tags:
   - Transaction
@@ -450,6 +460,28 @@ apis:
   - type: APIReference
     url: https://developer.zemplerbank.com/
   baseURL: ''
+- aid: cashplus:cashplus-operations-applications-application-api
+  name: Cashplus Bank Operations Applications - Application API
+  description: >-
+    The Operations Applications - Application API from Cashplus Bank — 11 operation(s) for operations
+    applications - application.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/identity
+  tags:
+  - Operations Applications - Application
+  properties:
+  - type: OpenAPI
+    url: openapi/cashplus-operations-applications-application-api-openapi.yml
+- aid: cashplus:cashplus-operations-applications-service-information-api
+  name: Cashplus Bank Operations Applications - Service Information API
+  description: >-
+    The Operations Applications - Service Information API from Cashplus Bank — 1 operation(s) for operations
+    applications - service information.
+  humanURL: https://developer.zemplerbank.com/developer-guides/api/identity
+  tags:
+  - Operations Applications - Service Information
+  properties:
+  - type: OpenAPI
+    url: openapi/cashplus-operations-applications-service-information-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/cashplus-capability-edges.yml

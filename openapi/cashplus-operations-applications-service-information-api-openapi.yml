@@ -1,0 +1,101 @@
+openapi: 3.2.0
+info:
+  description: 'The Zempler application API allows you to create applications to open new bank accounts. To help you start working with our application API as quickly and easily as possible, please have a read of the guide below. If you get stuck at any point, please email api.support@zemplerbank.com.
+
+
+    Sandbox
+
+
+    This Sandbox environment provides a means to test integrations prior to going live so it doesn''t perform any live identity / company verification.
+
+
+    Please use the ClientID: aps.swagger.client and Secret: secret for sandbox.
+
+
+    You can test different responses by altering the final digit of the mobile number submitted - see the explanation below under the section titled "TESTING DIFFERENT APPLICATION STATUSES" for more details.
+
+
+    Submit An Application For A Current Account
+
+
+    To submit an application, please complete the following 4 simple steps:
+
+
+    Retrieve the two parameters required to submit an application:
+
+
+    Industry Id - select the relevant industry id for the business you''re opening the account for from the list of industries found in the /application/industries endpoint.
+
+
+    Terms and conditions reference number - The product terms and conditions are available on the /products/products endpoint. It''s important you refresh each time to get the latest version.
+
+
+    This will provide a {tCsReferenceNumber} and associated URL. Terms and conditions need to be displayed to and approved by the applicant before you submit the application.
+
+
+    Submit all required data fields specified to the /application/business/limited endpoint. Data descriptions are available by clicking the ''Model'' link under ''Data Type'' heading in the parameter list.
+
+
+    The response you receive will contain a message describing the status of the application. If the application is approved immediately, the response will also contain the {sortCode} and {accountNumber} for the account. Otherwise, please store the {referenceNumber} to check the application status later.
+
+
+    If manual review or documents are required, the status can be checked later via the /application/status endpoint. You can also retrieve the {sortCode} and {accountNumber} from the /application/clearingInfo after the application is approved. Both endpoints require the {referenceNumber} returned in step 3.
+
+
+    Testing Different Application Statuses
+
+
+    To test different responses to application requests, simply change the last number of the mobile number to:
+
+
+    0 = ''Duplicate'' application status
+
+
+    1 = ''InternalReview'' status
+
+
+    2 = ''DocsRequired'' status
+
+
+    3-9 = ''Approved'' status
+
+
+    (e.g. 07111222333 or 07111222338 would return ''Approved'', while 07111222332 would return ''DocsRequired'')'
+  version: v1
+  title: Zempler API - Applications Operations Applications…
+servers:
+- url: https://apisandbox.zempler.tech/applications/
+tags:
+- name: Operations Applications - Service Information
+paths:
+  /info/version:
+    get:
+      tags:
+      - Operations Applications - Service Information
+      operationId: GETinfo/version
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+      summary: GE tinfo/version
+      x-summary-source: derived
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          scopes:
+            aps_profile: APS profile data.
+            applications: Allow access to application API.
+            accounts: Allow access to account and transaction data on behalf of the client.
+            payments: Allow access to payments and payment submissions data.
+            eligibility: Allow access to eligibility API.
+          tokenUrl: https://apisandbox.zempler.tech/identity/auth/connect/token
+      description: OAuth2 Client Credentials flow

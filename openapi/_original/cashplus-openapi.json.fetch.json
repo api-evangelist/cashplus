@@ -1,0 +1,12 @@
+{
+ "url": "https://developer.zemplerbank.com/api-swagger/swagger_applications.json?v=1",
+ "final": "https://developer.zemplerbank.com/api-swagger/swagger_applications.json?v=1",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 122620,
+ "sha256": "333875fe5f3133108cb8e42fa7ae65fd99e1b37ba10b0110665293f4b25cc154",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

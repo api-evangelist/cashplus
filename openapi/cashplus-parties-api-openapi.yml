@@ -120,178 +120,9 @@ paths:
       - PSUOAuth2Security:
         - accounts
 components:
-  responses:
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          schema:
-            type: string
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    403Error:
-      description: Forbidden
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    200AccountsAccountIdPartyRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    200PartyRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-    200AccountsAccountIdPartiesRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty3'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty3'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty3'
-    404Error:
-      description: Not found
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    500Error:
-      description: Internal Server Error
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
   schemas:
     TownName:
       description: Name of a built-up area, with defined boundaries, and a local government.
-      type: string
-      minLength: 1
-      maxLength: 35
-    OBAddressTypeCode:
-      description: Identifies the nature of the postal address.
-      type: string
-      enum:
-      - Business
-      - Correspondence
-      - DeliveryTo
-      - MailTo
-      - POBox
-      - Postal
-      - Residential
-      - Statement
-    PartyNumber:
-      description: Number assigned by an agent to identify its customer.
       type: string
       minLength: 1
       maxLength: 35
@@ -300,53 +131,55 @@ components:
       type: string
       minLength: 1
       maxLength: 350
-    Meta:
-      title: MetaData
+    CountryCode:
+      description: Nation with its own government, occupying a particular territory.
+      type: string
+      pattern: ^[A-Z]{2,2}$
+    OBReadParty2:
       type: object
-      description: Meta Data relevant to the payload
+      required:
+      - Data
       properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
+        Data:
+          type: object
+          properties:
+            Party:
+              $ref: '#/components/schemas/OBParty2'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
       additionalProperties: false
-    PostCode:
-      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+    PartyId:
+      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
       type: string
       minLength: 1
-      maxLength: 16
-    OBErrorResponse1:
-      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      maxLength: 40
+    StreetName:
+      description: Name of a street or thoroughfare.
+      type: string
+      minLength: 1
+      maxLength: 70
+    OBPartyRelationships1:
       type: object
+      description: The Party's relationships with other resources.
       properties:
-        Code:
-          description: High level textual error code, to help categorize the errors.
-          type: string
-          minLength: 1
-          maxLength: 40
-        Id:
-          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
-          type: string
-          minLength: 1
-          maxLength: 40
-        Message:
-          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Errors:
-          items:
-            $ref: '#/components/schemas/OBError1'
-          type: array
-          minItems: 1
-      required:
-      - Code
-      - Message
-      - Errors
-      additionalProperties: false
+        Account:
+          type: object
+          required:
+          - Related
+          - Id
+          description: Relationship to the Account resource.
+          properties:
+            Related:
+              description: Absolute URI to the related resource.
+              type: string
+              format: uri
+            Id:
+              description: Unique identification as assigned by the ASPSP to uniquely identify the related resource.
+              type: string
+              minLength: 1
+              maxLength: 40
     OBError1:
       type: object
       properties:
@@ -401,25 +234,11 @@ components:
       - Message
       additionalProperties: false
       minProperties: 1
-    PhoneNumber_0:
-      description: Collection of information that identifies a phone number, as defined by telecom services.
+    CountrySubDivision:
+      description: Identifies a subdivision of a country eg, state, region, county.
       type: string
-      pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
-    OBReadParty2:
-      type: object
-      required:
-      - Data
-      properties:
-        Data:
-          type: object
-          properties:
-            Party:
-              $ref: '#/components/schemas/OBParty2'
-        Links:
-          $ref: '#/components/schemas/Links'
-        Meta:
-          $ref: '#/components/schemas/Meta'
-      additionalProperties: false
+      minLength: 1
+      maxLength: 35
     Links:
       type: object
       description: Links relevant to the payload
@@ -503,29 +322,94 @@ components:
               Country:
                 $ref: '#/components/schemas/CountryCode'
       additionalProperties: false
-    PartyId:
-      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
+    OBExternalPartyType1Code:
+      description: Party type, in a coded form.
+      type: string
+      enum:
+      - Delegate
+      - Joint
+      - Sole
+    PartyNumber:
+      description: Number assigned by an agent to identify its customer.
       type: string
       minLength: 1
-      maxLength: 40
-    OBExternalAccountRole1Code:
-      description: A party’s role with respect to the related account.
+      maxLength: 35
+    OBReadParty3:
+      type: object
+      required:
+      - Data
+      properties:
+        Data:
+          type: object
+          properties:
+            Party:
+              type: array
+              items:
+                $ref: '#/components/schemas/OBParty2'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
+      additionalProperties: false
+    OBAddressTypeCode:
+      description: Identifies the nature of the postal address.
       type: string
-      x-namespaced-enum:
-      - UK.OBIE.Administrator
-      - UK.OBIE.Beneficiary
-      - UK.OBIE.CustodianForMinor
-      - UK.OBIE.Granter
-      - UK.OBIE.LegalGuardian
-      - UK.OBIE.OtherParty
-      - UK.OBIE.PowerOfAttorney
-      - UK.OBIE.Principal
-      - UK.OBIE.Protector
-      - UK.OBIE.RegisteredShareholderName
-      - UK.OBIE.SecondaryOwner
-      - UK.OBIE.SeniorManagingOfficial
-      - UK.OBIE.Settlor
-      - UK.OBIE.SuccessorOnDeath
+      enum:
+      - Business
+      - Correspondence
+      - DeliveryTo
+      - MailTo
+      - POBox
+      - Postal
+      - Residential
+      - Statement
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+      type: string
+      minLength: 1
+      maxLength: 16
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+    OBErrorResponse1:
+      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      type: object
+      properties:
+        Code:
+          description: High level textual error code, to help categorize the errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Id:
+          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Message:
+          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Errors:
+          items:
+            $ref: '#/components/schemas/OBError1'
+          type: array
+          minItems: 1
+      required:
+      - Code
+      - Message
+      - Errors
+      additionalProperties: false
     PhoneNumber_1:
       description: Collection of information that identifies a mobile phone number, as defined by telecom services.
       type: string
@@ -546,89 +430,227 @@ components:
       - UK.OBIE.PublicLimitedCompany
       - UK.OBIE.ScottishLimitedPartnership
       - UK.OBIE.Sole
-    BuildingNumber:
-      description: Number that identifies the position of a building on a street.
+    PhoneNumber_0:
+      description: Collection of information that identifies a phone number, as defined by telecom services.
       type: string
-      minLength: 1
-      maxLength: 16
-    StreetName:
-      description: Name of a street or thoroughfare.
-      type: string
-      minLength: 1
-      maxLength: 70
-    Name_3:
-      description: Name by which a party is known and which is usually used to identify that party.
-      type: string
-      minLength: 1
-      maxLength: 350
-    OBReadParty3:
-      type: object
-      required:
-      - Data
-      properties:
-        Data:
-          type: object
-          properties:
-            Party:
-              type: array
-              items:
-                $ref: '#/components/schemas/OBParty2'
-        Links:
-          $ref: '#/components/schemas/Links'
-        Meta:
-          $ref: '#/components/schemas/Meta'
-      additionalProperties: false
+      pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
     EmailAddress:
       description: Address for electronic mail (e-mail).
       type: string
       minLength: 1
       maxLength: 256
-    CountrySubDivision:
-      description: Identifies a subdivision of a country eg, state, region, county.
+    Name_3:
+      description: Name by which a party is known and which is usually used to identify that party.
       type: string
       minLength: 1
-      maxLength: 35
-    OBPartyRelationships1:
-      type: object
-      description: The Party's relationships with other resources.
-      properties:
-        Account:
-          type: object
-          required:
-          - Related
-          - Id
-          description: Relationship to the Account resource.
-          properties:
-            Related:
-              description: Absolute URI to the related resource.
-              type: string
-              format: uri
-            Id:
-              description: Unique identification as assigned by the ASPSP to uniquely identify the related resource.
-              type: string
-              minLength: 1
-              maxLength: 40
+      maxLength: 350
+    BuildingNumber:
+      description: Number that identifies the position of a building on a street.
+      type: string
+      minLength: 1
+      maxLength: 16
+    OBExternalAccountRole1Code:
+      description: A party’s role with respect to the related account.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.Administrator
+      - UK.OBIE.Beneficiary
+      - UK.OBIE.CustodianForMinor
+      - UK.OBIE.Granter
+      - UK.OBIE.LegalGuardian
+      - UK.OBIE.OtherParty
+      - UK.OBIE.PowerOfAttorney
+      - UK.OBIE.Principal
+      - UK.OBIE.Protector
+      - UK.OBIE.RegisteredShareholderName
+      - UK.OBIE.SecondaryOwner
+      - UK.OBIE.SeniorManagingOfficial
+      - UK.OBIE.Settlor
+      - UK.OBIE.SuccessorOnDeath
     ISODateTime:
       description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
       format: date-time
-    CountryCode:
-      description: Nation with its own government, occupying a particular territory.
-      type: string
-      pattern: ^[A-Z]{2,2}$
-    OBExternalPartyType1Code:
-      description: Party type, in a coded form.
-      type: string
-      enum:
-      - Delegate
-      - Joint
-      - Sole
+  responses:
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200PartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    200AccountsAccountIdPartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    200AccountsAccountIdPartiesRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty3'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty3'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty3'
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    403Error:
+      description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
   parameters:
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
     x-fapi-customer-ip-address:
       in: header
       name: x-fapi-customer-ip-address
       required: false
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
       schema:
         type: string
     Authorization:
@@ -645,28 +667,6 @@ components:
       required: true
       schema:
         type: string
-    x-customer-user-agent:
-      in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
-      required: false
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
-    x-fapi-auth-date:
-      in: header
-      name: x-fapi-auth-date
-      required: false
-      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
-      schema:
-        type: string
-        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2
