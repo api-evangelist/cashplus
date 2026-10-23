@@ -99,3 +99,9 @@ components:
             eligibility: Allow access to eligibility API.
           tokenUrl: https://apisandbox.zempler.tech/identity/auth/connect/token
       description: OAuth2 Client Credentials flow
+x-provenance:
+  method: harvested
+  publisher: Cashplus Bank
+  source: https://developer.zemplerbank.com/api-swagger/swagger_applications.json?v=1
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
